@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    document.write('<div id="header"></div>');
+    document.write('<div id="content"> <h1>Thông tin Media</h1> <p>Chi tiết về media sẽ hiển thị tại đây...</p> </div>');
+    document.write('<div id="footer"></div>');
+
+    fetch("header.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("header").innerHTML = data);
+
+    fetch("footer.html")
+        .then(response => response.text())
+        .then(data => document.getElementById("footer").innerHTML = data);
+</script>
+
+</body>
+</html>
