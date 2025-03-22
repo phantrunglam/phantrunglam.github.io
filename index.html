@@ -1,78 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-<title>PHAN NGÔ GIA PHẢ</title>
-<link rel="stylesheet" type="text/css" href="css/default.css" />
-	</head>
-	<script src="./scripts/search.js"></script>
-	<script src="./scripts/languageRedirect.js"></script>
-
-	<body class="index_page">
-       	<div id="view_id">
-			<div id="combined_header_id">
-				<div id="header_id">
-					<div id="language-switch">
-						<a href="javascript:setLanguage('en');">English</a> |
-						<a href="javascript:setLanguage('vn');">Tiếng Việt</a>
-					</div>
-					<div class="header_inner_id">
-						<div id="header_emblem_left_id">
-							<img src="resources/emblem.png" alt="" />
-						</div>
-						<div id="header_text_id">
-							<h1>Phan Ngô gia phả</h1>
-						</div>
-					</div>
-				</div>
-
-				<div id="menu_id">
-					<ul id="menu_row_id">
-						<li class="menu_item">
-							<a href="javascript:goToPage('index.html');">Home</a>
-						</li>
-						<li class="menu_item">
-							<a href="javascript:goToPage('personlist.html');">Persons</a>
-						</li>
-						<li class="menu_item">
-							<a href="javascript:goToPage('familylist.html');">Families</a>
-						</li>
-						<li class="menu_item">
-							<a href="javascript:goToPage('sourcelist.html');">Sources</a>
-						</li>
-						<li class="menu_item">
-							<a href="javascript:goToPage('statistics.html');">Statistics</a>
-						</li>
-						<li class="menu_item">
-							<a href="javascript:goToPage('contact.html');">Contact</a>
-						</li>
-						<li class="menu_item search_item">
-							<label for="search-input"></label><input type="text" id="search-input" placeholder="Tìm kiếm..." onkeyup="searchPerson()">
-							<ul id="search-results"></ul>
-						</li>
-					</ul>
-				</div>
-			</div>
-            
-            <div id="content_id">
-				<script type="text/javascript">let languageData = [{"languageKey":"vn","linkKey":"languages\/vn\/index.html"}]</script>
-				<script type="text/javascript" src="scripts/languageRedirect.js"></script>
-
-				<script type="text/javascript">
-					window.onload = function() {
-						setTimeout(checkLanguage, 10000); // Dừng lại cho người dùng chọn ngôn ngữ
-						};
-				</script>
-            </div>
-
-
-			<div id="separator"></div>
-            
-            <div id="footer_id">
-                <div id="footer_text_id">
-					<a target="_blank" href="https://phantrunglam.github.io/languages/vn/index.html">Admin: Phan Trung Lam, @2025 Phan Ngô Đại tộc</a>
-				</div>
-            </div>
-        </div>
-	</body>
+<html lang="vn">
+<head>
+	<meta charset="UTF-8" />
+	<title>PHAN NGÔ GIA PHẢ</title>
+	<link rel="stylesheet" type="text/css" href="css/default.css" />
+	<script>
+		// Đặt ngôn ngữ mặc định là "vn" và chuyển hướng ngay lập tức
+		document.addEventListener("DOMContentLoaded", function () {
+			localStorage.setItem("preferredLanguage", "vn");
+			window.location.href = "languages/vn/index.html";
+		});
+	</script>
+</head>
+<body>
+<noscript>
+	<p>Vui lòng bật JavaScript để xem trang này.</p>
+</noscript>
+</body>
 </html>
