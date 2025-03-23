@@ -4,19 +4,35 @@ import re
 directory = "languages/en"
 log_file = "transform_web.log"
 
-# Thêm menu mới
+# Menu mới cần thay thế
 new_menu = '''
-    <nav>
-        <ul>
-            <li><a href="/languages/en/index.html">Home</a></li>
-            <li><a href="/languages/en/persons">Persons</a></li>
-            <li><a href="/languages/en/families">Families</a></li>
-            <li><a href="/languages/en/charts">Charts</a></li>
-            <li><a href="/languages/en/events">Events</a></li>
-            <li><input type="text" id="search_input" placeholder="Search for Person..."></li>
-            <li><button id="back_button" onclick="window.history.back();">⬅ Back</button></li>
-        </ul>
-    </nav>
+    <div id="menu_id">
+    <ul id="menu_row_id">
+        <li class="menu_item active_menu_item">
+            <a href="/languages/en/index.html">Home</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/en/personlist.html">Person</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/en/familylist.html">Family</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/en/sourcelist.html">Sources</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/en/statistics.html">Statistics</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/en/contact.html">Contact</a>
+        </li>
+        <li><button id="back_button" onclick="window.history.back();">⬅ Back</button></li>
+        <li class="menu_item search_item">
+            <input type="text" id="search_input" placeholder="Search Person...">
+            <div class="search-dropdown"></div>
+        </li>
+    </ul>
+</div>
 '''
 
 # Thêm scripts vào <head>
@@ -41,8 +57,8 @@ def update_html_files():
 
                 original_content = content
 
-                # Thay thế hoặc thêm menu vào file HTML
-                content = re.sub(r"<nav>.*?</nav>", new_menu, content, flags=re.DOTALL)
+                # Xóa toàn bộ đoạn từ <div id="separator"></div> đến <div id="separator"></div> và thay bằng new_menu
+                content = re.sub(r'<div id="separator"></div>.*?<div id="separator"></div>', new_menu, content, flags=re.DOTALL)
 
                 # Kiểm tra nếu chưa có scripts thì thêm vào ngay trước </head>
                 if "search_person.js" not in content:
