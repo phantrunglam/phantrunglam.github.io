@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vn">
 <head>
     <meta charset="UTF-8"/>
     <title>Phan Ngô gia phả</title>
     <link rel="stylesheet" type="text/css" href="../../css/default.css"/>
+    <script src="/scripts/search_person.js"></script>
+    <script src="/scripts/back_button.js"></script>
+
 </head>
-<script src="../../scripts/search.js"></script>
+<!--<script src="../../scripts/search.js"></script>-->
 
 
 <body class="index_page">
@@ -43,14 +46,27 @@
                 <li class="menu_item">
                     <a href="../../languages/vn/contact.html">Liên hệ</a>
                 </li>
+                <li class="menu_item">
+                    <a href="#" onclick="goBack()">Back</a>
+                </li>
                 <!-- Ô tìm kiếm -->
                 <li class="menu_item search_item">
-                    <label for="search-input"></label><input type="text" id="search-input" placeholder="Tìm kiếm..." onkeyup="searchPerson_vn()">
-                    <ul id="search-results"></ul>
+                    <input type="text" id="search_input" placeholder="Tìm kiếm nhân vật...">
+                    <div class="search-dropdown"></div>
                 </li>
+
+
             </ul>
         </div>
     </div>
+
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+
+    </script>
+
     <div id="content_id">
         <div class="main_heading">
             <h1>Phan Ngô Đại tộc</h1>

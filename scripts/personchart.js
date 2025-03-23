@@ -325,12 +325,25 @@ function drawBoxForPerson(person, boxUnderPosition) {
     context.stroke();
 }
 
+// childBoxIndexes --> first, now change to ancestorBoxIndexes
+//
 function drawLinesForBox(box) {
-    for (var i = 0; i < box.childBoxIndexes.length; i++) {
+
+    /*for (var i = 0; i < box.childBoxIndexes.length; i++) {
+        // childBoxIndexes
         var index = box.childBoxIndexes[i];
         context.beginPath();
         context.moveTo(box.left, box.top + box.height / 2.0);
         context.lineTo(personChartData[index].left + personChartData[index].width, personChartData[index].top + personChartData[index].height / 2.0);
+        context.strokeStyle = linesColor;
+        context.stroke();
+    }*/
+    for (var i = 0; i < box.ancestorBoxIndexes.length; i++) {
+
+        var index = box.ancestorBoxIndexes[i];
+        context.beginPath();
+        context.moveTo(box.left + box.width, box.top + box.height / 2.0);
+        context.lineTo(personChartData[index].left, personChartData[index].top + personChartData[index].height / 2.0);
         context.strokeStyle = linesColor;
         context.stroke();
     }
@@ -351,12 +364,23 @@ function drawLinesForBox(box) {
         context.strokeStyle = linesColor;
         context.stroke();
     }
-    
-    for (var i = 0; i < box.ancestorBoxIndexes.length; i++) {
-        var index = box.ancestorBoxIndexes[i];
+    // ancestorBoxIndexes -->
+   /*for (var i = 0; i < box.ancestorBoxIndexes.length; i++) {
+
+       var index = box.ancestorBoxIndexes[i];
+       context.beginPath();
+       context.moveTo(box.left + box.width, box.top + box.height / 2.0);
+       context.lineTo(personChartData[index].left, personChartData[index].top + personChartData[index].height / 2.0);
+       context.strokeStyle = linesColor;
+       context.stroke();
+   }*/
+
+    for (var i = 0; i < box.childBoxIndexes.length; i++) {
+        // childBoxIndexes
+        var index = box.childBoxIndexes[i];
         context.beginPath();
-        context.moveTo(box.left + box.width, box.top + box.height / 2.0);
-        context.lineTo(personChartData[index].left, personChartData[index].top + personChartData[index].height / 2.0);
+        context.moveTo(box.left, box.top + box.height / 2.0);
+        context.lineTo(personChartData[index].left + personChartData[index].width, personChartData[index].top + personChartData[index].height / 2.0);
         context.strokeStyle = linesColor;
         context.stroke();
     }
