@@ -4,7 +4,11 @@
 		<meta charset="UTF-8" />
 <title>Phan Ngô gia phả</title>
 <link rel="stylesheet" type="text/css" href="../../css/default.css" />
-	</head>
+	
+    <script src="/scripts/search_person.js"></script>
+    <script src="/scripts/back_button.js"></script>
+
+</head>
 	<body class="statistics_page">
         
        	<div id="view_id">
@@ -20,42 +24,42 @@
                 </div>
             </div>
             
-            <div id="separator"></div>
             
-            <div id="menu_id">
-                <ul id="menu_row_id">
-	<li class="menu_item">
-		<a href="../../languages/vn/index.html">Trang chủ</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../languages/vn/personlist.html">Cá nhân</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../languages/vn/familylist.html">Gia đình</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../languages/vn/sourcelist.html">Nguồn tham chiếu</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../languages/vn/chartlist.html">Charts</a>
-	</li>
-	<li class="menu_item active_menu_item">
-		<a href="../../languages/vn/statistics.html">Thống kê</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../languages/vn/contact.html">Liên hệ</a>
-	</li>
-</ul>
-            </div>
-            
-            <div id="separator"></div>
+    <div id="menu_id">
+    <ul id="menu_row_id">
+        <li class="menu_item active_menu_item">
+            <a href="/languages/vn/index.html">Trang chủ</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/personlist.html">Nhân vật</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/familylist.html">Gia đình</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/sourcelist.html">Nguồn tham chiếu</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/statistics.html">Thống kê</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/contact.html">Contact</a>
+        </li>
+        <li><button id="back_button" onclick="window.history.back();">⬅ Back</button></li>
+        <li class="menu_item search_item">
+            <input type="text" id="search_input" placeholder="Tìm kiếm Nhân vật...">
+            <div class="search-dropdown"></div>
+        </li>
+    </ul>
+</div>
+
             
             <div id="content_id">
                 <div class="main_heading">
 	<h1>Thống kê</h1>
 </div>
 <div class="page_subsection">
-	<h2>Cá nhân</h2>
+	<h2>Nhân vật</h2>
 <table>
 	<thead>
 		<tr>
@@ -66,7 +70,7 @@
 	<tbody>
 		<tr>
 			<td>Số Cá nhân</td>
-			<td>1245</td>
+			<td>1246</td>
 		</tr>
 		<tr>
 			<td>Số đàn ông</td>
@@ -74,18 +78,18 @@
 		</tr>
 		<tr>
 			<td>Số phụ nữ</td>
-			<td>331</td>
+			<td>332</td>
 		</tr>
 		<tr>
-			<td>Giới tính không rõ</td>
+			<td>Giới tính không xác định</td>
 			<td>0</td>
 		</tr>
 		<tr>
-			<td>Hifi</td>
+			<td>Đa giới tính</td>
 			<td>0</td>
 		</tr>
 		<tr>
-			<td>Sự kiện Cá nhân</td>
+			<td>Sự kiện Nhân vật</td>
 			<td>911</td>
 		</tr>
 	</tbody>
@@ -104,11 +108,11 @@
 	<tbody>
 		<tr>
 			<td>Tổng số Gia đình</td>
-			<td>530</td>
+			<td>531</td>
 		</tr>
 		<tr>
 			<td>Số gia đình chưa ly hôn</td>
-			<td>93</td>
+			<td>94</td>
 		</tr>
 		<tr>
 			<td>Số gia đình ly hôn</td>
@@ -116,7 +120,7 @@
 		</tr>
 		<tr>
 			<td>Sự kiện Gia đình</td>
-			<td>183</td>
+			<td>184</td>
 		</tr>
 	</tbody>
 </table>
@@ -255,9 +259,9 @@
 </div>
 </div>
 <div class="statistic_chart">
-	<h3>Thống kê theo Nơi sinh</h3>
+	<h3>Nơi sinh</h3>
 <div>
-	<img src="../../resources/StatisticChart_en__StatisticsChartBuilder_Type_Places-_PersonEvent_Birth-place.png" alt="Thống kê theo Nơi sinh" />
+	<img src="../../resources/StatisticChart_en__StatisticsChartBuilder_Type_Places-_PersonEvent_Birth-place.png" alt="Nơi sinh" />
 </div>
 </div>
 <div class="statistic_chart">
@@ -310,6 +314,7 @@
             
             <div id="footer_id">
                 <div id="footer_text_id">
+<a target="_blank" href="https://https://phantrunglam.github.io/macfamilytree">Quản trị viên: Phan Trung Lâm, @Copyright 2025 Phan Ngô Đại tộc</a>
 </div>
             </div>
         </div>

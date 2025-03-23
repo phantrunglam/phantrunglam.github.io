@@ -4,7 +4,11 @@
 		<meta charset="UTF-8" />
 <title>Phan Ngô gia phả - Phan Phụng Tuân</title>
 <link rel="stylesheet" type="text/css" href="../../../css/default.css" />
-	</head>
+	
+    <script src="/scripts/search_person.js"></script>
+    <script src="/scripts/back_button.js"></script>
+
+</head>
 	<body class="person_page">
         
        	<div id="view_id">
@@ -20,45 +24,46 @@
                 </div>
             </div>
             
-            <div id="separator"></div>
             
-            <div id="menu_id">
-                <ul id="menu_row_id">
-	<li class="menu_item">
-		<a href="../../../languages/vn/index.html">Trang chủ</a>
-	</li>
-	<li class="menu_item active_menu_item">
-		<a href="../../../languages/vn/personlist.html">Cá nhân</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../../languages/vn/familylist.html">Gia đình</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../../languages/vn/sourcelist.html">Nguồn tham chiếu</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../../languages/vn/chartlist.html">Charts</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../../languages/vn/statistics.html">Thống kê</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../../languages/vn/contact.html">Liên hệ</a>
-	</li>
-</ul>
-            </div>
-            
-            <div id="separator"></div>
+    <div id="menu_id">
+    <ul id="menu_row_id">
+        <li class="menu_item active_menu_item">
+            <a href="/languages/vn/index.html">Trang chủ</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/personlist.html">Nhân vật</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/familylist.html">Gia đình</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/sourcelist.html">Nguồn tham chiếu</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/statistics.html">Thống kê</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/contact.html">Contact</a>
+        </li>
+        <li><button id="back_button" onclick="window.history.back();">⬅ Back</button></li>
+        <li class="menu_item search_item">
+            <input type="text" id="search_input" placeholder="Tìm kiếm Nhân vật...">
+            <div class="search-dropdown"></div>
+        </li>
+    </ul>
+</div>
+
             
             <div id="content_id">
                 <div class="main_heading">
 <a href="../../../languages/vn/medias/Media_O30231777.html"><img src="../../../resources/Media_O30231777_I97094324_Cropped_Thumbnail.jpeg" alt="" /></a>
 	<h1>Phan Phụng Tuân</h1>
+<span id="person_id_id">GEDCOM ID: I97094324</span>
 </div>
 <div class="page_subsection">
 <div id="page_subsection_canvas_id">
 </div>
-	<h2>Phả đồ</h2>
+	<h2>Phả hệ</h2>
 <canvas id="person_chart_canvas_id" width="742" height="446"></canvas>
 </div>
 	<script type="text/javascript">var personChartData = [{"left":210,"dateLineSpacing":12,"currentPerson":true,"ancestorBoxIndexes":[1,4],"dateTextLines":["1954-06-02"],"partnerBoxIndexes":[5,6],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":49,"nameTextLines":["Phan Phụng Tuân"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I97094324.html","personExported":true,"personGender":0,"top":107},{"left":396,"dateLineSpacing":0,"currentPerson":false,"ancestorBoxIndexes":[2,3],"dateTextLines":[],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":51,"nameTextLines":["13.6 Phan Tiến ","Triển"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I1446176.html","personExported":true,"personGender":0,"top":77},{"left":582,"dateLineSpacing":12,"currentPerson":false,"ancestorBoxIndexes":[],"dateTextLines":["1858-06-29"],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":83,"nameTextLines":["12.1 Giáo thụ phủ ","Quảng Oai Phan ","Đức Mậu"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I22312879.html","personExported":true,"personGender":0,"top":24},{"left":582,"dateLineSpacing":12,"currentPerson":false,"ancestorBoxIndexes":[],"dateTextLines":["1893"],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":49,"nameTextLines":["Vương Thị Diệu"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I22888764.html","personExported":true,"personGender":1,"top":131},{"left":396,"dateLineSpacing":0,"currentPerson":false,"ancestorBoxIndexes":[],"dateTextLines":[],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":34,"nameTextLines":["Nguyễn Thị Rịu"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I5137688.html","personExported":true,"personGender":1,"top":204.5},{"left":210,"dateLineSpacing":0,"currentPerson":false,"ancestorBoxIndexes":[],"dateTextLines":[],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":34,"nameTextLines":["Nguyễn Thị Mận"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I0604.html","personExported":true,"personGender":1,"top":255.5},{"left":210,"dateLineSpacing":0,"currentPerson":false,"ancestorBoxIndexes":[],"dateTextLines":[],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[7,8],"height":34,"nameTextLines":["Chu Vân Anh"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I11603871.html","personExported":true,"personGender":1,"top":350.5},{"left":24,"dateLineSpacing":0,"currentPerson":false,"ancestorBoxIndexes":[],"dateTextLines":[],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":51,"nameTextLines":["Phan Chu Quỳnh ","Trang"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I39326303.html","personExported":true,"personGender":1,"top":313},{"left":24,"dateLineSpacing":0,"currentPerson":false,"ancestorBoxIndexes":[],"dateTextLines":[],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":34,"nameTextLines":["Phan Việt Nga"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I64757250.html","personExported":true,"personGender":1,"top":388}]</script>
@@ -115,7 +120,7 @@
 </div>
 
 <div class="page_subsection">
-	<h2>Sự kiện Cá nhân</h2>
+	<h2>Sự kiện Nhân vật</h2>
 <table>
 	<thead>
 		<tr>
@@ -127,25 +132,25 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td><a href="../../../languages/vn/events/Event_95954840.html"><img src="../../../resources/Bullet.png" alt="" />Sinh</a></td>
+			<td><a href="../../../languages/vn/events/Event_39647664.html"><img src="../../../resources/Bullet.png" alt="" />Sinh</a></td>
 			<td>1954-06-02</td>
 			<td></td>
 			<td></td>
 		</tr>
 		<tr>
-			<td><a href="../../../languages/vn/events/Event_63784616.html"><img src="../../../resources/Bullet.png" alt="" />Marriage</a></td>
+			<td><a href="../../../languages/vn/events/Event_57658560.html"><img src="../../../resources/Bullet.png" alt="" />Marriage</a></td>
 			<td></td>
 			<td></td>
 			<td>11935,-1845</td>
 		</tr>
 		<tr>
-			<td><a href="../../../languages/vn/events/Event_38164382.html"><img src="../../../resources/Bullet.png" alt="" />Ngày mất (AL)</a></td>
+			<td><a href="../../../languages/vn/events/Event_9174856.html"><img src="../../../resources/Bullet.png" alt="" />Ngày mất (AL)</a></td>
 			<td>2021-06-01</td>
 			<td></td>
 			<td></td>
 		</tr>
 		<tr>
-			<td><a href="../../../languages/vn/events/Event_4650506.html"><img src="../../../resources/Bullet.png" alt="" />Mất</a></td>
+			<td><a href="../../../languages/vn/events/Event_66927590.html"><img src="../../../resources/Bullet.png" alt="" />Mất</a></td>
 			<td>2021-07-10</td>
 			<td>Thôn Tống Văn, Vũ Chính, Tp. Thái Bình, Việt nam</td>
 			<td></td>
@@ -171,7 +176,7 @@
 </div>
 
 <div class="page_subsection" id="media_subsection_id">
-	<h2>Media / Hình ảnh/Video/Audio</h2>
+	<h2>Media / Hình ảnh/Video/Audio / Hình ảnh/Video/Audio</h2>
 <div class="media_subsection">
 <div class="media_pictures_subsection">
 	<h3>Hình ảnh</h3>
@@ -193,6 +198,7 @@
             
             <div id="footer_id">
                 <div id="footer_text_id">
+<a target="_blank" href="https://https://phantrunglam.github.io/macfamilytree">Quản trị viên: Phan Trung Lâm, @Copyright 2025 Phan Ngô Đại tộc</a>
 </div>
             </div>
         </div>

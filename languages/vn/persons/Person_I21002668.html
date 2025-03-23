@@ -4,7 +4,11 @@
 		<meta charset="UTF-8" />
 <title>Phan Ngô gia phả - Dương Đình Nghệ</title>
 <link rel="stylesheet" type="text/css" href="../../../css/default.css" />
-	</head>
+	
+    <script src="/scripts/search_person.js"></script>
+    <script src="/scripts/back_button.js"></script>
+
+</head>
 	<body class="person_page">
         
        	<div id="view_id">
@@ -20,47 +24,48 @@
                 </div>
             </div>
             
-            <div id="separator"></div>
             
-            <div id="menu_id">
-                <ul id="menu_row_id">
-	<li class="menu_item">
-		<a href="../../../languages/vn/index.html">Trang chủ</a>
-	</li>
-	<li class="menu_item active_menu_item">
-		<a href="../../../languages/vn/personlist.html">Cá nhân</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../../languages/vn/familylist.html">Gia đình</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../../languages/vn/sourcelist.html">Nguồn tham chiếu</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../../languages/vn/chartlist.html">Charts</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../../languages/vn/statistics.html">Thống kê</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../../languages/vn/contact.html">Liên hệ</a>
-	</li>
-</ul>
-            </div>
-            
-            <div id="separator"></div>
+    <div id="menu_id">
+    <ul id="menu_row_id">
+        <li class="menu_item active_menu_item">
+            <a href="/languages/vn/index.html">Trang chủ</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/personlist.html">Nhân vật</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/familylist.html">Gia đình</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/sourcelist.html">Nguồn tham chiếu</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/statistics.html">Thống kê</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/contact.html">Contact</a>
+        </li>
+        <li><button id="back_button" onclick="window.history.back();">⬅ Back</button></li>
+        <li class="menu_item search_item">
+            <input type="text" id="search_input" placeholder="Tìm kiếm Nhân vật...">
+            <div class="search-dropdown"></div>
+        </li>
+    </ul>
+</div>
+
             
             <div id="content_id">
                 <div class="main_heading">
 	<h1>Dương Đình Nghệ</h1>
+<span id="person_id_id">GEDCOM ID: I21002668</span>
 </div>
 <div class="page_subsection">
 <div id="page_subsection_canvas_id">
 </div>
-	<h2>Phả đồ</h2>
+	<h2>Phả hệ</h2>
 <canvas id="person_chart_canvas_id" width="370" height="166"></canvas>
 </div>
-	<script type="text/javascript">var personChartData = [{"left":210,"dateLineSpacing":0,"currentPerson":true,"ancestorBoxIndexes":[],"dateTextLines":[],"partnerBoxIndexes":[1],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":51,"nameTextLines":["Dương Đình ","Nghệ"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I21002668.html","personExported":true,"personGender":0,"top":24},{"left":210,"dateLineSpacing":0,"currentPerson":false,"ancestorBoxIndexes":[],"dateTextLines":[],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[2],"height":34,"nameTextLines":["Unknown Cá nhân"],"personExported":false,"top":99.5},{"left":24,"dateLineSpacing":0,"currentPerson":false,"ancestorBoxIndexes":[],"dateTextLines":[],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":51,"nameTextLines":["Dương Như ","Ngọc"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I13091980.html","personExported":true,"personGender":1,"top":91}]</script>
+	<script type="text/javascript">var personChartData = [{"left":210,"dateLineSpacing":0,"currentPerson":true,"ancestorBoxIndexes":[],"dateTextLines":[],"partnerBoxIndexes":[1],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":51,"nameTextLines":["Dương Đình ","Nghệ"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I21002668.html","personExported":true,"personGender":0,"top":24},{"left":210,"dateLineSpacing":0,"currentPerson":false,"ancestorBoxIndexes":[],"dateTextLines":[],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[2],"height":34,"nameTextLines":["Unknown Nhân vật"],"personExported":false,"top":99.5},{"left":24,"dateLineSpacing":0,"currentPerson":false,"ancestorBoxIndexes":[],"dateTextLines":[],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":51,"nameTextLines":["Dương Như ","Ngọc"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I13091980.html","personExported":true,"personGender":1,"top":91}]</script>
 	<script type="text/javascript" src="../../../scripts/personchart.js"></script>
 	<script type="text/javascript">initPersonChart()</script>
 
@@ -86,7 +91,7 @@
 </div>
 
 <div class="page_subsection">
-	<h2>Sự kiện Cá nhân</h2>
+	<h2>Sự kiện Nhân vật</h2>
 <table>
 	<thead>
 		<tr>
@@ -98,13 +103,13 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td><a href="../../../languages/vn/events/Event_68419713.html"><img src="../../../resources/Bullet.png" alt="" />Other Sự kiện</a></td>
+			<td><a href="../../../languages/vn/events/Event_14628936.html"><img src="../../../resources/Bullet.png" alt="" />Other Event</a></td>
 			<td></td>
 			<td></td>
 			<td></td>
 		</tr>
 		<tr>
-			<td><a href="../../../languages/vn/events/Event_76064018.html"><img src="../../../resources/Bullet.png" alt="" />Other Sự kiện</a></td>
+			<td><a href="../../../languages/vn/events/Event_20263004.html"><img src="../../../resources/Bullet.png" alt="" />Other Event</a></td>
 			<td></td>
 			<td></td>
 			<td>2845,3355</td>
@@ -119,6 +124,7 @@
             
             <div id="footer_id">
                 <div id="footer_text_id">
+<a target="_blank" href="https://https://phantrunglam.github.io/macfamilytree">Quản trị viên: Phan Trung Lâm, @Copyright 2025 Phan Ngô Đại tộc</a>
 </div>
             </div>
         </div>

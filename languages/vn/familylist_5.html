@@ -4,7 +4,11 @@
 		<meta charset="UTF-8" />
 <title>Phan Ngô gia phả - Gia đình</title>
 <link rel="stylesheet" type="text/css" href="../../css/default.css" />
-	</head>
+	
+    <script src="/scripts/search_person.js"></script>
+    <script src="/scripts/back_button.js"></script>
+
+</head>
 	<body class="family_list_page">
         
        	<div id="view_id">
@@ -20,35 +24,35 @@
                 </div>
             </div>
             
-            <div id="separator"></div>
             
-            <div id="menu_id">
-                <ul id="menu_row_id">
-	<li class="menu_item">
-		<a href="../../languages/vn/index.html">Trang chủ</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../languages/vn/personlist.html">Cá nhân</a>
-	</li>
-	<li class="menu_item active_menu_item">
-		<a href="../../languages/vn/familylist.html">Gia đình</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../languages/vn/sourcelist.html">Nguồn tham chiếu</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../languages/vn/chartlist.html">Charts</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../languages/vn/statistics.html">Thống kê</a>
-	</li>
-	<li class="menu_item">
-		<a href="../../languages/vn/contact.html">Liên hệ</a>
-	</li>
-</ul>
-            </div>
-            
-            <div id="separator"></div>
+    <div id="menu_id">
+    <ul id="menu_row_id">
+        <li class="menu_item active_menu_item">
+            <a href="/languages/vn/index.html">Trang chủ</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/personlist.html">Nhân vật</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/familylist.html">Gia đình</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/sourcelist.html">Nguồn tham chiếu</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/statistics.html">Thống kê</a>
+        </li>
+        <li class="menu_item">
+            <a href="/languages/vn/contact.html">Contact</a>
+        </li>
+        <li><button id="back_button" onclick="window.history.back();">⬅ Back</button></li>
+        <li class="menu_item search_item">
+            <input type="text" id="search_input" placeholder="Tìm kiếm Nhân vật...">
+            <div class="search-dropdown"></div>
+        </li>
+    </ul>
+</div>
+
             
             <div id="content_id">
                 <div class="main_heading">
@@ -105,7 +109,7 @@
 			<td><a href="../../languages/vn/families/Family_F91167000.html">(trưởng) Nam Quận Công Ngô Khắc Cung / Tỷ quốc Thái Trường Công chúa Lê Thị Ngọc Phiến</a></td>
 			<td><a href="../../languages/vn/persons/Person_I38367254.html"><img src="../../resources/GenderMale.png" alt="" />(trưởng) Nam Quận Công Ngô Khắc Cung</a></td>
 			<td><a href="../../languages/vn/persons/Person_I83369072.html"><img src="../../resources/GenderFemale.png" alt="" />Tỷ quốc Thái Trường Công chúa Lê Thị Ngọc Phiến</a></td>
-			<td><a href="../../languages/vn/persons/Person_I30609204.html"><img src="../../resources/GenderMale.png" alt="" />Ai Khê hầu Ngô Văn Diệp/Thái</a><br />
+			<td><a href="../../languages/vn/persons/Person_I30609204.html"><img src="../../resources/GenderMale.png" alt="" />Ai Khê hầu Ngô Văn Diệp/Thái Ngô</a><br />
 <a href="../../languages/vn/persons/Person_84386358.html"><img src="../../resources/GenderFemale.png" alt="" />Ngô Thị Ngọc Phi</a><br />
 <a href="../../languages/vn/persons/Person_21818404.html"><img src="../../resources/GenderFemale.png" alt="" />Ngô Thị Ngọc Phương</a><br />
 </td>
@@ -114,8 +118,8 @@
 			<td></td>
 		</tr>
 		<tr>
-			<td><a href="../../languages/vn/families/Family_F43330780.html">Ai Khê hầu Ngô Văn Diệp/Thái / Tỷ Thái Phu nhân Nguyễn Thị Ba</a></td>
-			<td><a href="../../languages/vn/persons/Person_I30609204.html"><img src="../../resources/GenderMale.png" alt="" />Ai Khê hầu Ngô Văn Diệp/Thái</a></td>
+			<td><a href="../../languages/vn/families/Family_F43330780.html">Ai Khê hầu Ngô Văn Diệp/Thái Ngô / Tỷ Thái Phu nhân Nguyễn Thị Ba</a></td>
+			<td><a href="../../languages/vn/persons/Person_I30609204.html"><img src="../../resources/GenderMale.png" alt="" />Ai Khê hầu Ngô Văn Diệp/Thái Ngô</a></td>
 			<td><a href="../../languages/vn/persons/Person_I70338086.html"><img src="../../resources/GenderFemale.png" alt="" />Tỷ Thái Phu nhân Nguyễn Thị Ba</a></td>
 			<td><a href="../../languages/vn/persons/Person_I27209208.html"><img src="../../resources/GenderMale.png" alt="" />Bình Giang hầu, Ninh quận công Ngô Đình Tú</a><br />
 </td>
@@ -1032,18 +1036,6 @@
 			<td></td>
 		</tr>
 		<tr>
-			<td><a href="../../languages/vn/families/Family_F75064215.html">Nguyễn Thân / Vũ Ngữ</a></td>
-			<td><a href="../../languages/vn/persons/Person_I39883012.html"><img src="../../resources/GenderMale.png" alt="" />Nguyễn Thân</a></td>
-			<td><a href="../../languages/vn/persons/Person_I59699215.html"><img src="../../resources/GenderFemale.png" alt="" />Vũ Ngữ</a></td>
-			<td><a href="../../languages/vn/persons/Person_I85983937.html"><img src="../../resources/GenderMale.png" alt="" />Nguyễn Văn Chuẩn</a><br />
-<a href="../../languages/vn/persons/Person_I5284308.html"><img src="../../resources/GenderFemale.png" alt="" />Nguyễn Đoan</a><br />
-<a href="../../languages/vn/persons/Person_I53671441.html"><img src="../../resources/GenderFemale.png" alt="" />Nguyễn Đoàn</a><br />
-</td>
-			<td></td>
-			<td></td>
-			<td></td>
-		</tr>
-		<tr>
 			<td><a href="../../languages/vn/families/Family_F0204.html">Nguyễn Thế Sơn / Phan Thị Thái Hà</a></td>
 			<td><a href="../../languages/vn/persons/Person_I0611.html"><img src="../../resources/GenderMale.png" alt="" />Nguyễn Thế Sơn</a></td>
 			<td><a href="../../languages/vn/persons/Person_I88429012.html"><img src="../../resources/GenderFemale.png" alt="" />Phan Thị Thái Hà</a></td>
@@ -1092,10 +1084,22 @@
 			<td></td>
 		</tr>
 		<tr>
+			<td><a href="../../languages/vn/families/Family_F75064215.html">Nguyễn Thư Thân / Vũ Ngữ</a></td>
+			<td><a href="../../languages/vn/persons/Person_I39883012.html"><img src="../../resources/GenderMale.png" alt="" />Nguyễn Thư Thân</a></td>
+			<td><a href="../../languages/vn/persons/Person_I59699215.html"><img src="../../resources/GenderFemale.png" alt="" />Vũ Ngữ</a></td>
+			<td><a href="../../languages/vn/persons/Person_I85983937.html"><img src="../../resources/GenderMale.png" alt="" />Nguyễn Văn Chuẩn</a><br />
+<a href="../../languages/vn/persons/Person_I5284308.html"><img src="../../resources/GenderFemale.png" alt="" />Nguyễn Đoan</a><br />
+<a href="../../languages/vn/persons/Person_I53671441.html"><img src="../../resources/GenderFemale.png" alt="" />Nguyễn Đoàn</a><br />
+</td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
 			<td><a href="../../languages/vn/families/Family_F75536102.html">Nguyễn Tiếp Hy / Nguyễn Văn</a></td>
 			<td><a href="../../languages/vn/persons/Person_I86204434.html"><img src="../../resources/GenderMale.png" alt="" />Nguyễn Tiếp Hy</a></td>
 			<td><a href="../../languages/vn/persons/Person_I51673472.html"><img src="../../resources/GenderFemale.png" alt="" />Nguyễn Văn</a></td>
-			<td><a href="../../languages/vn/persons/Person_I39883012.html"><img src="../../resources/GenderMale.png" alt="" />Nguyễn Thân</a><br />
+			<td><a href="../../languages/vn/persons/Person_I39883012.html"><img src="../../resources/GenderMale.png" alt="" />Nguyễn Thư Thân</a><br />
 <a href="../../languages/vn/persons/Person_I9105760.html"><img src="../../resources/GenderMale.png" alt="" />Nguyễn Đức Trí</a><br />
 </td>
 			<td></td>
@@ -1255,6 +1259,7 @@
             
             <div id="footer_id">
                 <div id="footer_text_id">
+<a target="_blank" href="https://https://phantrunglam.github.io/macfamilytree">Quản trị viên: Phan Trung Lâm, @Copyright 2025 Phan Ngô Đại tộc</a>
 </div>
             </div>
         </div>
