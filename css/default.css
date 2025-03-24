@@ -346,6 +346,30 @@ table tr:nth-child(even) > td {
     display: none;
 }
 
+/* Added on 2025-03-24 */
+.paging_menu_item {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 10px 15px;
+    margin: 5px;
+    background-color: #f8f9fa;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.paging_menu_item a {
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+}
+
+.paging_menu_item:hover {
+    background-color: #d1e7fd;
+}
+
+
 
 /*Person page*/
 .person_page .main_heading img {

@@ -45,8 +45,11 @@
   "Login": "Đăng nhập",
   "Logout": "Đăng xuất",
   "Imprint": "Liên hệ",
+  "Contact" : "Liên hệ",
+  "Author contact" : "Liên hệ Tác giả",
+
   "Events": "Sự kiện",
-  "Events": "Các Sự kiện",
+  "Event": "Các Sự kiện",
   "Facts": "Đặc tả",
   "Fact": "Đặc điểm sinh học",
   "Statistic Charts": "Biểu đồ Thống kê",
@@ -70,7 +73,8 @@
   "Total Families" : "Tổng số Gia đình",
   "Married Families" : "Số gia đình chưa ly hôn",
   "Divorced Families" : "Số gia đình ly hôn",
-  "Total Persons" : "Số Cá nhân",
+  "Marriage" : "Hôn nhân",
+  "Total Persons" : "Số Nhân vật",
   "Male persons" : "Số đàn ông",
   "Female persons" : "Số phụ nữ",
   "Persons with unknown gender" : "Giới tính không xác định",
@@ -91,7 +95,7 @@
   "First Name Distribution" : "Biểu đồ Phân phối theo Tên",
   "Title Distribution" : "Biểu đồ phân phối theo Chức danh",
   "Year of Birth" : "Biểu đồ theo Năm sinh",
-  "Year of Death" : "Biểu đồ theo năm mắt",
+  "Year of Death" : "Biểu đồ theo Năm mất",
   "Year of Burial" : "Năm chôn cất",
   "Month of Birth" : "Biểu đồ ngày sinh theo Tháng",
   "Month of Death" : "Biểu đồ ngày mất theo Tháng",
@@ -110,6 +114,16 @@
   "www.syniumsoftware.com" : "https://phantrunglam.github.io",
   "Mac App Store" : "Phiên bản",
   "MacFamilyTree 10": "Phát hành 1.0",
-  "Entries assigned to this media" : "media được dùng với"
+  "Entries assigned to this media" : "media được dùng với các đối tượng sau:",
+  "Entries assigned to this source" : "Những nơi tham chiếu đến Nguồn thông tin này:",
+  "Page" : "Trang",
+  "Quality" : "Chất lượng",
+  "Don't know" : "Chưa rõ",
+  "Information" : " Thông tin",
+  "Evidence" : "Bằng chứng",
+  "/languages/en/" : "/languages/vn/",
+  "../../languages/en/" : "/languages/vn/",
+  "https://https://phantrunglam.github.io/macfamilytree" : "https://phantrunglam.github.io"
+
 
 }
