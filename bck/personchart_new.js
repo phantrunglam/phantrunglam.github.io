@@ -20,7 +20,7 @@ var animateInterval;
 function flipHorizontalCoordinates() {
     var canvasWidth = canvas.width / (window.devicePixelRatio || 1);
     personChartData.forEach(box => {
-        box.left = canvas.width - box.left - box.width;
+        box.left = canvasWidth - box.left - box.width;
     });
 }
 
@@ -542,7 +542,7 @@ function mouseDown(event) {
     }
 }
 // original
-function indexOfRectUnderPosition(p) {
+/* function indexOfRectUnderPosition(p) {
     for (var i = 0; i < personChartData.length; i++) {
         if (pointInRect(p, personChartData[i].left, personChartData[i].top, personChartData[i].width, personChartData[i].height)) {
             return i;
@@ -550,10 +550,10 @@ function indexOfRectUnderPosition(p) {
     }
     
     return -1;
-}
+} */
 
 // Sửa hàm kiểm tra vị trí chuột 2025-03-25
-/* function indexOfRectUnderPosition(p) {
+function indexOfRectUnderPosition(p) {
     var rect = canvas.getBoundingClientRect();
     var scaleX = canvas.width / rect.width;
     var flippedX = canvas.width - (p.x * scaleX);
@@ -568,7 +568,7 @@ function indexOfRectUnderPosition(p) {
     }
     return -1;
 }
- */
+
 function pointInRect(p, x, y, w, h) {
     if (p.x > x && p.x < x + w && p.y > y && p.y < y + h) {
         return true;

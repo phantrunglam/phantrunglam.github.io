@@ -16,14 +16,6 @@ var lighterUnknownGenderBoxColor;
 var linesColor = '#000000';
 var animateInterval;
 
-// Hàm đảo ngược tọa độ ngang
-function flipHorizontalCoordinates() {
-    var canvasWidth = canvas.width / (window.devicePixelRatio || 1);
-    personChartData.forEach(box => {
-        box.left = canvas.width - box.left - box.width;
-    });
-}
-
 function initPersonChart() {
     canvas = document.getElementById('person_chart_canvas_id');
     
@@ -33,9 +25,6 @@ function initPersonChart() {
     else {
         alert('Canvas not supported on this browser!');
     }
-
-    // Đảo tọa độ trước khi vẽ
-    flipHorizontalCoordinates();
     
     canvas.addEventListener("mousedown", mouseDown, false);
     canvas.addEventListener("mousemove", mouseMove, false);
@@ -338,9 +327,17 @@ function drawBoxForPerson(person, boxUnderPosition) {
 
 // childBoxIndexes --> first, now change to ancestorBoxIndexes
 //
-// 2025-03-25 thay đổi để theo hướng reverse
-/* function drawLinesForBox(box) {
+function drawLinesForBox(box) {
 
+    /*for (var i = 0; i < box.childBoxIndexes.length; i++) {
+        // childBoxIndexes
+        var index = box.childBoxIndexes[i];
+        context.beginPath();
+        context.moveTo(box.left, box.top + box.height / 2.0);
+        context.lineTo(personChartData[index].left + personChartData[index].width, personChartData[index].top + personChartData[index].height / 2.0);
+        context.strokeStyle = linesColor;
+        context.stroke();
+    }*/
     for (var i = 0; i < box.ancestorBoxIndexes.length; i++) {
 
         var index = box.ancestorBoxIndexes[i];
@@ -367,8 +364,17 @@ function drawBoxForPerson(person, boxUnderPosition) {
         context.strokeStyle = linesColor;
         context.stroke();
     }
-
     // ancestorBoxIndexes -->
+   /*for (var i = 0; i < box.ancestorBoxIndexes.length; i++) {
+
+       var index = box.ancestorBoxIndexes[i];
+       context.beginPath();
+       context.moveTo(box.left + box.width, box.top + box.height / 2.0);
+       context.lineTo(personChartData[index].left, personChartData[index].top + personChartData[index].height / 2.0);
+       context.strokeStyle = linesColor;
+       context.stroke();
+   }*/
+
     for (var i = 0; i < box.childBoxIndexes.length; i++) {
         // childBoxIndexes
         var index = box.childBoxIndexes[i];
@@ -378,59 +384,7 @@ function drawBoxForPerson(person, boxUnderPosition) {
         context.strokeStyle = linesColor;
         context.stroke();
     }
-} */
-
-// 2025-03-25 new drawLinesForBox
-    function drawLinesForBox(box) {
-        // Đường nối đến con (sang phải)
-        for (var i = 0; i < box.childBoxIndexes.length; i++) {
-            var index = box.childBoxIndexes[i];
-            context.beginPath();
-            context.moveTo(box.left + box.width, box.top + box.height / 2.0);
-            context.lineTo(
-                personChartData[index].left,
-                personChartData[index].top + personChartData[index].height / 2.0
-            );
-            context.strokeStyle = linesColor;
-            context.stroke();
-        }
-    
-        // Đường nối đến tổ tiên (sang trái)
-        for (var i = 0; i < box.ancestorBoxIndexes.length; i++) {
-            var index = box.ancestorBoxIndexes[i];
-            context.beginPath();
-            context.moveTo(box.left, box.top + box.height / 2.0);
-            context.lineTo(
-                personChartData[index].left + personChartData[index].width,
-                personChartData[index].top + personChartData[index].height / 2.0
-            );
-            context.strokeStyle = linesColor;
-            context.stroke();
-        }
-    
-        // Đường nối vợ/chồng (giữ nguyên)
-        for (var i = 0; i < box.partnerBoxIndexes.length; i++) {
-            var index = box.partnerBoxIndexes[i];
-            context.beginPath();
-            
-            if (box.top < personChartData[index].top) {
-                context.moveTo(box.left + box.width / 2.0, box.top + box.height);
-                context.lineTo(
-                    personChartData[index].left + personChartData[index].width / 2.0,
-                    personChartData[index].top
-                );
-            } else {
-                context.moveTo(box.left + box.width / 2.0, box.top);
-                context.lineTo(
-                    personChartData[index].left + personChartData[index].width / 2.0,
-                    personChartData[index].top + personChartData[index].height
-                );
-            }
-            
-            context.strokeStyle = linesColor;
-            context.stroke();
-        }
-    }
+}
 
 function getTouchPosition(event) {
     var rect = canvas.getBoundingClientRect();
@@ -541,7 +495,7 @@ function mouseDown(event) {
         document.location.href = updatedLink;
     }
 }
-// original
+
 function indexOfRectUnderPosition(p) {
     for (var i = 0; i < personChartData.length; i++) {
         if (pointInRect(p, personChartData[i].left, personChartData[i].top, personChartData[i].width, personChartData[i].height)) {
@@ -552,23 +506,6 @@ function indexOfRectUnderPosition(p) {
     return -1;
 }
 
-// Sửa hàm kiểm tra vị trí chuột 2025-03-25
-/* function indexOfRectUnderPosition(p) {
-    var rect = canvas.getBoundingClientRect();
-    var scaleX = canvas.width / rect.width;
-    var flippedX = canvas.width - (p.x * scaleX);
-    var scaledY = p.y * (canvas.height / rect.height);
-    
-    for (var i = 0; i < personChartData.length; i++) {
-        var box = personChartData[i];
-        if (flippedX > box.left && flippedX < box.left + box.width && 
-            scaledY > box.top && scaledY < box.top + box.height) {
-            return i;
-        }
-    }
-    return -1;
-}
- */
 function pointInRect(p, x, y, w, h) {
     if (p.x > x && p.x < x + w && p.y > y && p.y < y + h) {
         return true;
