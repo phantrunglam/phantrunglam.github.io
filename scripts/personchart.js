@@ -16,6 +16,13 @@ var lighterUnknownGenderBoxColor;
 var linesColor = '#000000';
 var animateInterval;
 
+// Vẽ box của Nhân vật chính nổi bật hơn
+var currentPersonBorderWidth = 3;
+var defaultBorderWidth = 0.5;
+var currentPersonlineWidth = '#FF5722';
+var defaultPersonlineWidth = '#333';
+
+
 // Hàm đảo ngược tọa độ ngang
 function flipHorizontalCoordinates() {
     var canvasWidth = canvas.width / (window.devicePixelRatio || 1);
@@ -330,10 +337,16 @@ function drawBoxForPerson(person, boxUnderPosition) {
     context.fill();
     context.restore();
     
-    context.lineWidth = 0.5;
-    context.strokeStyle = '#333';
+    //context.lineWidth = 0.5;
+    // context.strokeStyle = '#333';
     
+    // Thay đổi phần vẽ viền cho currentPerson
+    context.lineWidth = person.currentPerson ? currentPersonBorderWidth : defaultBorderWidth;
+    context.strokeStyle = person.currentPerson ? currentPersonlineWidth : defaultPersonlineWidth;
+
     context.stroke();
+
+
 }
 
 // childBoxIndexes --> first, now change to ancestorBoxIndexes
