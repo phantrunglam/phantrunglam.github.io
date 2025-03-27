@@ -876,7 +876,7 @@ table tr:nth-child(even) > td {
     display: block;
     margin: 10px auto;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 20px;
     background-color: #d9534f;
     color: white;
     border: none;

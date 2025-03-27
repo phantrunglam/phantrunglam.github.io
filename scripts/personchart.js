@@ -7,9 +7,9 @@ var lastTime;
 var firstFrame = true;
 var canvas;
 var context;
-var maleBoxColor = '#AACCDD';
+var maleBoxColor = '#008DD5';
 var lighterMaleBoxColor;
-var femaleBoxColor = '#CCEEFF';
+var femaleBoxColor = '#FFAAEA';
 var lighterFemaleBoxColor;
 var unknownGenderBoxColor;
 var lighterUnknownGenderBoxColor;
@@ -19,7 +19,7 @@ var animateInterval;
 // Vẽ box của Nhân vật chính nổi bật hơn
 var currentPersonBorderWidth = 3;
 var defaultBorderWidth = 0.5;
-var currentPersonlineWidth = '#FF5722';
+var currentPersonlineWidth = '#DDF45B';
 var defaultPersonlineWidth = '#333';
 
 

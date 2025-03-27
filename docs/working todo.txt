@@ -1,7 +1,0 @@
-
-
-Person_I73236675.html
-Phan Quốc Anh
-
-TODO: make media part become gallery style with navigation buttons.
-
