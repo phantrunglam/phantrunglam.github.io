@@ -126,5 +126,9 @@
   "/languages/en/" : "/languages/vn/",
   "../../languages/en/" : "/languages/vn/",
   "https://https://phantrunglam.github.io/macfamilytree" : "https://phantrunglam.netlify.app"
+  ,
+  "html>Nhân vật</a>" : "html>Họ tộc</a>",
+  "html>Persons</a>" : "html>Họ tộc</a>",
+  "html>Other</a>" : "html>Khác</a>"
 
 }
