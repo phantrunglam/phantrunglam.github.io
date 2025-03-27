@@ -28,26 +28,26 @@
     <div id="menu_id">
     <ul id="menu_row_id">
         <li class="menu_item active_menu_item">
-            <a href="/languages/vn/index.html">Home</a>
+            <a href="/languages/vn/index.html">Trang chủ</a>
         </li>
         <li class="menu_item">
-            <a href="/languages/vn/personlist.html">Person</a>
+            <a href="/languages/vn/personlist.html">Nhân vật</a>
         </li>
         <li class="menu_item">
-            <a href="/languages/vn/familylist.html">Family</a>
+            <a href="/languages/vn/familylist.html">Gia đình</a>
         </li>
         <li class="menu_item">
-            <a href="/languages/vn/sourcelist.html">Sources</a>
+            <a href="/languages/vn/sourcelist.html">Nguồn tham chiếu</a>
         </li>
         <li class="menu_item">
-            <a href="/languages/vn/statistics.html">Statistics</a>
+            <a href="/languages/vn/statistics.html">Thống kê</a>
         </li>
         <li class="menu_item">
-            <a href="/languages/vn/contact.html">Contact</a>
+            <a href="/languages/vn/contact.html">Liên hệ</a>
         </li>
         <li><button id="back_button" onclick="window.history.back();">⬅ Back</button></li>
         <li class="menu_item search_item">
-            <input type="text" id="search_input" placeholder="Search Person...">
+            <input type="text" id="search_input" placeholder="Tìm kiếm Nhân vật...">
             <div class="search-dropdown"></div>
         </li>
     </ul>
@@ -62,22 +62,22 @@
 <div class="page_subsection">
 <div id="page_subsection_canvas_id">
 </div>
-	<h2>Person Chart</h2>
+	<h2>Phả đồ</h2>
 <canvas id="person_chart_canvas_id" width="742" height="133"></canvas>
 </div>
-	<script type="text/javascript">var personChartData = [{"left":210,"dateLineSpacing":0,"currentPerson":true,"ancestorBoxIndexes":[1],"dateTextLines":[],"partnerBoxIndexes":[3],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":34,"nameTextLines":["Phan Vinh"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I71965230.html","personExported":true,"personGender":0,"top":24},{"left":396,"dateLineSpacing":0,"currentPerson":false,"ancestorBoxIndexes":[2],"dateTextLines":[],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":34,"nameTextLines":["Phan Quang"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I73391246.html","personExported":true,"personGender":0,"top":24},{"left":582,"dateLineSpacing":0,"currentPerson":false,"ancestorBoxIndexes":[],"dateTextLines":[],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":34,"nameTextLines":["Phan Văn Thiếp"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I71735558.html","personExported":true,"personGender":0,"top":24},{"left":210,"dateLineSpacing":0,"currentPerson":false,"ancestorBoxIndexes":[],"dateTextLines":[],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[4],"height":34,"nameTextLines":["Unknown Person"],"personExported":false,"top":75},{"left":24,"dateLineSpacing":0,"currentPerson":false,"ancestorBoxIndexes":[],"dateTextLines":[],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":34,"nameTextLines":["Phan Tuấn Anh"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I95258188.html","personExported":true,"personGender":0,"top":75}]</script>
+	<script type="text/javascript">var personChartData = [{"left":210,"dateLineSpacing":0,"currentPerson":true,"ancestorBoxIndexes":[1],"dateTextLines":[],"partnerBoxIndexes":[3],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":34,"nameTextLines":["Phan Vinh"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I71965230.html","personExported":true,"personGender":0,"top":24},{"left":396,"dateLineSpacing":0,"currentPerson":false,"ancestorBoxIndexes":[2],"dateTextLines":[],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":34,"nameTextLines":["Phan Quang"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I73391246.html","personExported":true,"personGender":0,"top":24},{"left":582,"dateLineSpacing":0,"currentPerson":false,"ancestorBoxIndexes":[],"dateTextLines":[],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":34,"nameTextLines":["Phan Văn Thiếp"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I71735558.html","personExported":true,"personGender":0,"top":24},{"left":210,"dateLineSpacing":0,"currentPerson":false,"ancestorBoxIndexes":[],"dateTextLines":[],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[4],"height":34,"nameTextLines":["Unknown Nhân vật"],"personExported":false,"top":75},{"left":24,"dateLineSpacing":0,"currentPerson":false,"ancestorBoxIndexes":[],"dateTextLines":[],"partnerBoxIndexes":[],"width":136,"nameLineSpacing":14,"childBoxIndexes":[],"height":34,"nameTextLines":["Phan Tuấn Anh"],"linkToPersonPage":"..\/..\/..\/languages\/en\/persons\/Person_I95258188.html","personExported":true,"personGender":0,"top":75}]</script>
 	<script type="text/javascript" src="../../../scripts/personchart.js"></script>
 	<script type="text/javascript">initPersonChart()</script>
 
 <div class="page_subsection">
-	<h2>Parents</h2>
+	<h2>Cha Mẹ</h2>
 <table>
 	<thead>
 		<tr>
-			<th class="table_data_left_aligned">Father</th>
-			<th class="table_data_left_aligned">Date of Birth</th>
-			<th class="table_data_left_aligned">Mother</th>
-			<th class="table_data_left_aligned">Date of Birth</th>
+			<th class="table_data_left_aligned">Cha</th>
+			<th class="table_data_left_aligned">Ngày sinh</th>
+			<th class="table_data_left_aligned">Mẹ</th>
+			<th class="table_data_left_aligned">Ngày sinh</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -92,13 +92,13 @@
 </div>
 
 <div class="page_subsection">
-	<h2>Partners</h2>
+	<h2>Vợ/Chồng</h2>
 <table>
 	<thead>
 		<tr>
-			<th class="table_data_left_aligned">Partner</th>
-			<th class="table_data_left_aligned">Date of Birth</th>
-			<th class="table_data_left_aligned">Children</th>
+			<th class="table_data_left_aligned">Vợ/Chồng</th>
+			<th class="table_data_left_aligned">Ngày sinh</th>
+			<th class="table_data_left_aligned">Con cái</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -118,7 +118,7 @@
             
             <div id="footer_id">
                 <div id="footer_text_id">
-<a target="_blank" href="https://www.syniumsoftware.com/macfamilytree">Webpage created with MacFamilyTree 10 for macOS</a>
+<a target="_blank" href="https://https://phantrunglam.github.io/macfamilytree">Quản trị viên: Phan Trung Lâm, @Copyright 2025 Phan Ngô Đại tộc</a>
 </div>
             </div>
         </div>
