@@ -1,4 +1,6 @@
-# Hướng Dẫn Sử Dụng Website Gia phả
+## Hướng Dẫn Sử Dụng 
+# Website Phan Ngô Gia phả
+### [https://phantrunglam.netlify.app](https://phantrunglam.netlify.app "https://phantrunglam.netlify.app")
 
 ## 1. Giới thiệu
 ### 1.1 Mục đích của trang Web
@@ -65,34 +67,37 @@
 - Danh sách các Nguồn tài liệu tham chiếu là "cơ sở cho các thông tin về Nhân vật, gia đình và các thông tin khác trong Gia phả" này sẽ hiện ra bên dưới.
 - Chọn và Bấm vào Tên của Nguồn tham chiếu
 - Chi tiết của Nguồn và các thông tin tham chiếu được hiện ra
-![Thông tinNguồn thham chiếu](info-source.png "Chi tiết Nguồn tham chiếu")
+![Nguồn thham chiếu](info-source.png "Chi tiết Nguồn tham chiếu")
 
 ## 3. Cách xem thông tin chi tiết
 ### 3.1 📜 Thông tin Nhân vật
 - Họ và Tên (ví dụ Phan Bá Khoát)
-- Số định danh GEDCOM: ví dụ I22040024 là mã số duy nhất gắn kết Nhân vật với các đặc điểm sinh học, các sự kiện, các media, và quan hệ với các thành viên gia đình 
-o	Xem sơ đồ gia phả của nhân vật
-•	🌳 Sơ đồ gia đình
-o	Cách di chuyển và mở rộng sơ đồ
-o	Các biểu tượng và màu sắc trên sơ đồ
+- Số định danh GEDCOM: ví dụ I22040024 là mã số duy nhất gắn kết Nhân vật với các đặc điểm sinh học, các sự kiện, các media, và quan hệ với các thành viên gia đình
+![Thông tin Nhân vật] (info-person.png "Chi tiết Nhân vật")
+
+Bên dưới là Phả đồ 🌳 (sơ đồ gia phả của nhân vật) của Nhân vật trung tâm được thể hiện.
+> Nhân vật trung tâm được vẽ trong Ô màu xanh sáng
+> Bên trái là Bố Mẹ và Ông Bà của Nhân vật
+> Bên dưới là Vợ/Chồng
+> Bên phải là Các con 
+- Các biểu tượng và màu sắc trên sơ đồ
+
+<a style="background-color:Violet";> Phụ nữ </a>
+<p> Hộp màu Tím là Phụ nữ
+<a style="background-color:DodgerBlue;"> Đàn ông</p> Hộp màu 
+
+
+#### 	Cách di chuyển và mở rộng sơ đồ
+Bấm vào mỗi hộp thì sẽ chuyển người đó thành Nhân vật trung tâm.
+
 
 
 ## 5. Liên hệ hỗ trợ
 📧 Email: ngophangiapha@gmail.com
 📞 Số điện thoại: 0989428xxx
+![Contact](menu-info-contact.png "Contact - Liên lạc")
 
 
-📖 Hướng Dẫn Sử Dụng Website Gia Phả
-1. Giới thiệu
-•	Mục đích của trang Web
-•	Cách tổ chức thông tin gia phả
-•	Các tính năng chính
-2. Cách tìm kiếm thông tin
-•	🔍 Tìm kiếm nhân vật
-o	Hướng dẫn sử dụng chức năng tìm kiếm
-o	Cách lọc và chọn nhân vật từ danh sách
-•	🖼️ Tìm kiếm phương tiện (hình ảnh, tài liệu, video)
-o	Sử dụng bộ lọc tìm kiếm media
 o	Xem chi tiết từng hình ảnh, tài liệu
 3. Cách xem thông tin chi tiết
 •	📜 Trang nhân vật
