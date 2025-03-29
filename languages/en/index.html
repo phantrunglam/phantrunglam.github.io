@@ -1,73 +1,37 @@
 <!DOCTYPE html>
+
 <html>
 <head>
-    <meta charset="UTF-8"/>
-    <title>Phan Ngô gia phả</title>
-    <link rel="stylesheet" type="text/css" href="../../css/default.css"/>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-
-    <script src="/scripts/search_person.js"></script>
-    <script src="/scripts/back_button.js"></script>
-
-</head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Phan Ngô gia phả</title>
+<link href="../../css/default.css" rel="stylesheet" type="text/css"/>
+<link href="/favicon.ico" rel="icon" type="image/x-icon"/>
+<script src="/scripts/back_button.js"></script><script src="/scripts/menu.js"></script><script src="/scripts/search_person.js"></script></head>
 <body class="home_page">
-
 <div id="view_id">
-
-    <div id="header_id">
-        <div id="header_inner_id">
-            <div id="header_emblem_left_id">
-                <img src="../../resources/emblem.png" alt=""/>
-            </div>
-            <div id="header_text_id">
-                <h1>Phan Ngô gia phả</h1>
-            </div>
-        </div>
-    </div>
-
-
-    <div id="menu_id">
-        <ul id="menu_row_id">
-            <li class="menu_item active_menu_item">
-                <a href="/languages/vn/index.html">Trang chủ</a>
-            </li>
-            <li class="menu_item">
-                <a href="/languages/vn/personlist.html">Họ tộc</a>
-            </li>
-            <li class="menu_item">
-                <a href="/languages/vn/familylist.html">Gia đình</a>
-            </li>
-            <li class="menu_item">
-                <a href="/languages/vn/sourcelist.html">Nguồn tham chiếu</a>
-            </li>
-            <li class="menu_item">
-                <a href="/languages/vn/statistics.html">Thống kê</a>
-            </li>
-            <li class="menu_item">
-                <a href="/languages/vn/contact.html">Liên hệ</a>
-            </li>
-            <li>
-                <button id="back_button" onclick="window.history.back();">⬅ Back</button>
-            </li>
-            <li class="menu_item search_item">
-                <input type="text" id="search_input" placeholder="Tìm kiếm Nhân vật...">
-                <div class="search-dropdown"></div>
-            </li>
-        </ul>
-    </div>
-
-
-    <div id="content_id">
-        <div class="main_heading">
-            <h1>Phan Ngô gia phả</h1>
-        </div>
-        <div class="page_subsection">
-            <div id="page_subsection_canvas_id">
-            </div>
-            <h2>Nhân vật trung tâm</h2>
-            <canvas id="person_chart_canvas_id" width="742" height="1010"></canvas>
-        </div>
-        <script type="text/javascript">var personChartData = [{
+<div id="header_id">
+<div id="header_inner_id">
+<div id="header_emblem_left_id">
+<img alt="" src="../../resources/emblem.png"/>
+</div>
+<div id="header_text_id">
+<h1>Phan Ngô gia phả</h1>
+</div>
+</div>
+</div>
+<div id="menu_id"></div>
+<div id="content_id">
+<div class="main_heading">
+<h1>Phan Ngô gia phả</h1>
+</div>
+<div class="page_subsection">
+<div id="page_subsection_canvas_id">
+</div>
+<h2>Nhân vật trung tâm</h2>
+<canvas height="1010" id="person_chart_canvas_id" width="742"></canvas>
+</div>
+<script type="text/javascript">var personChartData = [{
             "left": 210,
             "dateLineSpacing": 12,
             "currentPerson": true,
@@ -372,23 +336,19 @@
             "personGender": 0,
             "top": 937
         }]</script>
-        <script type="text/javascript" src="../../scripts/personchart.js"></script>
-        <script type="text/javascript">initPersonChart()</script>
-
-        <div id="home_page_creation_date_id">
+<script src="../../scripts/personchart.js" type="text/javascript"></script>
+<script type="text/javascript">initPersonChart()</script>
+<div id="home_page_creation_date_id">
             Created: Mar 24, 2025
         </div>
-
-    </div>
-
-    <div id="separator"></div>
-
-    <div id="footer_id">
-        <div id="footer_text_id">
-            <a target="_blank" href="https://phantrunglam.github.io">Quản trị viên: Phan Trung
+</div>
+<div id="separator"></div>
+<div id="footer_id">
+<div id="footer_text_id">
+<a href="https://phantrunglam.github.io" target="_blank">Quản trị viên: Phan Trung
                 Lâm, @Copyright 2025 Phan Ngô Đại tộc</a>
-        </div>
-    </div>
+</div>
+</div>
 </div>
 </body>
 </html>

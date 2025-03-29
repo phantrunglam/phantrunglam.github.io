@@ -86,6 +86,42 @@ def process_all_files():
                 process_html(src_path, dest_path, dictionary)
 
 
+def process_html(file_path, new_file_path, dictionary):
+    try:
+        with open(file_path, "r", encoding="utf-8") as file:
+            content = file.read()
+
+        translated_content, changes = translate_content(content, dictionary)
+
+        os.makedirs(os.path.dirname(new_file_path), exist_ok=True)
+        with open(new_file_path, "w", encoding="utf-8") as file:
+            file.write(translated_content)
+
+        if changes:
+            with open(LOG_FILE, "a", encoding="utf-8") as log:
+                log.write(f"Translated: {file_path} -> {new_file_path}\n")
+                for change in changes:
+                    log.write(f"  {change}\n")
+                log.write("\n")
+        print(f"✅ Đã xử lý: {file_path} -> {new_file_path}")
+    except Exception as e:
+        print(f"❌ Lỗi khi xử lý {file_path}: {e}")
+
+
+# Xử lý toàn bộ file HTML
+def process_all_files():
+    dictionary = load_dictionary()
+    if not os.path.exists(DEST_LANG):
+        shutil.copytree(SRC_LANG, DEST_LANG)
+    for root, _, files in os.walk(DEST_LANG):
+        for file in files:
+            if file.endswith(".html"):
+                src_path = os.path.join(root, file)
+                dest_path = src_path.replace(SRC_LANG, SRC_LANG, 1)
+                process_html(src_path, dest_path, dictionary)
+
+
+
 
 
 process_all_files()

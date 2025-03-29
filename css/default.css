@@ -36,7 +36,7 @@ body {
 
 #view_id {
     background-color: rgba(235, 250, 255, 0.85);
-    width: 850px;
+    width: 90%;
     margin-left: auto;
     margin-right: auto;
     margin-bottom: 24px;
@@ -196,7 +196,7 @@ table tr:nth-child(even) > td {
 /*Menu*/
 #menu_id {
     text-align: center;
-    max-width: 850px;
+    max-width: 90%;
     margin: 0 auto;
     background-color: rgba(0, 0, 0, 0.1);
     border-radius: 24px;
@@ -234,49 +234,54 @@ table tr:nth-child(even) > td {
 /* Search box styles */
 .search_item {
     position: relative;
+    display: flex;
+    flex-direction: column;
 }
 
 #search_input {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: 200px;
+    width: 160px;
+    order: 1; /* Đảm bảo input nằm trên cùng */
 }
 
 .search-dropdown {
     position: absolute;
     background: white;
     border: 1px solid #ccc;
-    width: 200px;
+    width: 100%;
     max-height: 200px;
     overflow-y: auto;
     display: none;
-    top: 35px;
+    top: 100%;
     left: 0;
+    margin-top: 5px;
     border-radius: 5px;
     font-size: 14px;
     font-family: Arial, sans-serif;
     z-index: 1000;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    order: 2; /* Đảm bảo dropdown nằm dưới input */
+}
+
+.search-dropdown.show {
+    display: block;
 }
 
 .search-result-item {
     padding: 8px;
     cursor: pointer;
     border-bottom: 1px solid #eee;
-    font-size: 14px;
-    font-family: Arial, sans-serif;
-    z-index: 1000;
-}
-
-.search-result-item a {
-    text-decoration: none;
-    color: black;
-    display: block;
 }
 
 .search-result-item:hover {
     background: #f0f0f0;
+}
+
+/* Tắt tooltip khi dropdown active */
+.search_item.active-search::after {
+    display: none !important;
 }
 
 /*Content*/
@@ -887,4 +892,46 @@ table tr:nth-child(even) > td {
 
 .back-button:hover {
     background-color: #c9302c;
+}
+
+/* Tooltip adjustments */
+.menu_item[data-tooltip]::after {
+    z-index: 100; /* Thấp hơn dropdown */
+    pointer-events: none; /* Cho phép click xuyên qua tooltip */
+}
+
+/* Search dropdown adjustments */
+.search-dropdown {
+    z-index: 1000; /* Cao hơn tooltip */
+    position: absolute;
+    top: calc(100% + 5px); /* Đẩy xuống dưới tooltip */
+}
+
+/* Tắt tooltip khi search active */
+.search_item.active-search .menu_item::after {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
+/* thêm vào 2025-03-30 01:13 */
+.highlight {
+    background-color: yellow;
+    font-weight: bold;
+    color: #000;
+}
+
+.result-item {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.result-item:hover {
+    background-color: #f0f0f0;
+}
+
+.no-results {
+    padding: 8px;
+    color: #666;
+    font-style: italic;
 }
