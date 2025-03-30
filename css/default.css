@@ -1,3 +1,7 @@
+/* ==================== */
+/* 1. FONT FACE DEFINITIONS */
+/* ==================== */
+/* last change: 2025-03-30 */
 @font-face {
     font-family: 'JosefinSans';
     src: url('../resources/JosefinSans-Light.eot');
@@ -20,6 +24,9 @@
     font-style: normal;
 }
 
+/* ==================== */
+/* 2. BASE STYLES */
+/* ==================== */
 body {
     margin: 0;
     padding: 0;
@@ -32,125 +39,69 @@ body {
     font-family: 'Tahoma', sans-serif;
     font-size: 13px;
     font-weight: lighter;
+    line-height: 1.5;
 }
 
-#view_id {
-    background-color: rgba(235, 250, 255, 0.85);
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-bottom: 24px;
-    margin-top: 24px;
-    padding: 24px;
-    -moz-border-radius: 24px;
-    border-radius: 24px;
+/* Mobile-first responsive base */
+@media (max-width: 768px) {
+    body {
+        font-size: 15px;
+        background-attachment: scroll;
+    }
 }
 
 a {
     color: #000000;
-}
-
-a:link {
     text-decoration: none;
 }
 
-a:visited {
-    text-decoration: none;
-}
-
-a:active {
+a:hover, a:active {
     color: #975;
     text-decoration: underline;
 }
 
-a:hover {
-    color: #000;
-    text-decoration: underline;
-}
-
-
 img {
+    max-width: 100%;
+    height: auto;
     border: 1px;
 }
 
-
-h1 {
-    text-decoration: none;
-    margin: 0px;
-    text-align: center;
-    font-weight: normal;
-}
-
-h2 {
-    margin: 20px 0px 20px 0px;
-    font-weight: bold;
-    padding: 4px;
-    background-color: rgba(0, 0, 0, 0.1);
-    -moz-border-radius: 24px;
+/* ==================== */
+/* 3. LAYOUT STRUCTURE */
+/* ==================== */
+#view_id {
+    background-color: rgba(235, 250, 255, 0.85);
+    width: 90%;
+    margin: 24px auto;
+    padding: 24px;
     border-radius: 24px;
-    font-weight: normal;
-    text-align: center;
 }
 
-
-table {
-    border-spacing: 1px;
-    width: 100%;
-    table-layout: auto;
-    padding: 5px;
-    font-size: 120%;
-    border-collapse: collapse;
+#content_id {
+    clear: both;
+    margin: 32px auto 64px;
+    max-width: 850px;
 }
 
-table tr {
-    text-align: left;
-    border-bottom: 1px solid;
-{
-% SeparatorColor %
-};
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #view_id {
+        width: 95%;
+        padding: 15px;
+        border-radius: 15px;
+        margin: 15px auto;
+    }
+    
+    #content_id {
+        margin: 20px auto;
+        padding: 0 10px;
+    }
 }
 
-table tr th {
-    font-weight: bold;
-    white-space: nowrap;
-    padding: 8px;
-}
-
-table tr td {
-    vertical-align: top;
-    padding: 8px;
-}
-
-.table_subheader_row {
-    text-align: center;
-    font-weight: bold;
-    font-size: 110%;
-}
-
-table tr td img {
-    vertical-align: middle;
-}
-
-.table_data_left_aligned {
-    text-align: left;
-}
-
-.table_data_center_aligned {
-    text-align: center;
-}
-
-.table_data_right_aligned {
-    text-align: right;
-}
-
-table tr:nth-child(odd) > td {
-    background-color: rgba(0, 0, 0, 0.03);
-}
-
-table tr:nth-child(even) > td {
-    background: none;
-}
-
+/* ==================== */
+/* 4. HEADER & NAVIGATION */
+/* ==================== */
+/* Header styles... (giữ nguyên các style header hiện có) */
 /*Header*/
 #header_id {
     position: relative;
@@ -192,8 +143,7 @@ table tr:nth-child(even) > td {
     white-space: normal;
 }
 
-
-/*Menu*/
+/* Menu styles - Responsive */
 #menu_id {
     text-align: center;
     max-width: 90%;
@@ -204,9 +154,10 @@ table tr:nth-child(even) > td {
 }
 
 #menu_row_id {
-    display: flex; /* Đảm bảo các item nằm trên một hàng */
+    display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-around; /* Dàn đều các mục menu */
+    justify-content: space-around;
     list-style: none;
     padding: 10px;
     margin: 0;
@@ -215,189 +166,87 @@ table tr:nth-child(even) > td {
 .menu_item {
     font-size: 110%;
     padding: 5px 10px;
+    flex: 1 0 auto;
+    min-width: 120px;
 }
 
-.menu_item a, .menu_item button {
-    display: block;
-    text-decoration: none;
-    color: black;
-    background: none;
-    border: none;
-    padding: 8px 12px;
-    cursor: pointer;
+/* Back button */
+#prevBtn { left: 10px; }
+#nextBtn { right: 10px; }
+
+
+@media (max-width: 600px) {
+    #menu_row_id {
+        flex-direction: column;
+    }
+    
+    .menu_item {
+        width: 100%;
+        text-align: center;
+        padding: 8px 0;
+    }
 }
 
-.menu_item a:hover, .menu_item button:hover {
-    text-decoration: underline;
+/* ==================== */
+/* 5. TYPOGRAPHY & HEADINGS */
+/* ==================== */
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0;
+    line-height: 1.2;
 }
 
-/* Search box styles */
-.search_item {
-    position: relative;
-    display: flex;
-    flex-direction: column;
+h1 {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
 }
 
-#search_input {
+h2 {
+    font-size: 2rem;
+    margin: 1.25rem 0;
     padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 160px;
-    order: 1; /* Đảm bảo input nằm trên cùng */
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 24px;
+    text-align: center;
 }
 
-.search-dropdown {
-    position: absolute;
-    background: white;
-    border: 1px solid #ccc;
+/* ==================== */
+/* 6. TABLES */
+/* ==================== */
+table {
     width: 100%;
-    max-height: 200px;
-    overflow-y: auto;
-    display: none;
-    top: 100%;
-    left: 0;
-    margin-top: 5px;
-    border-radius: 5px;
-    font-size: 14px;
-    font-family: Arial, sans-serif;
-    z-index: 1000;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    order: 2; /* Đảm bảo dropdown nằm dưới input */
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 1rem;
 }
 
-.search-dropdown.show {
-    display: block;
+th, td {
+    padding: 12px 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
-.search-result-item {
-    padding: 8px;
-    cursor: pointer;
-    border-bottom: 1px solid #eee;
+/* Responsive tables */
+@media (max-width: 768px) {
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
 }
 
-.search-result-item:hover {
-    background: #f0f0f0;
+/* ==================== */
+/* 7. MEDIA & GALLERY */
+/* ==================== */
+/* Giữ nguyên các style media hiện có, thêm responsive */
+@media (max-width: 600px) {
+    .media_div {
+        width: 100%;
+        height: auto;
+        margin: 0 0 15px 0;
+        float: none;
+    }
 }
-
-/* Tắt tooltip khi dropdown active */
-.search_item.active-search::after {
-    display: none !important;
-}
-
-/*Content*/
-#content_id {
-    clear: both;
-    margin-bottom: 64px;
-    margin-right: auto;
-    margin-left: auto;
-    margin-top: 32px;
-    max-width: 850px;
-}
-
-
-.main_heading {
-    font-size: 125%;
-}
-
-.home_page .main_heading {
-    display: none;
-}
-
-
-/*Page subsections*/
-.page_subsection {
-    margin-top: 10px;
-    padding: 0px;
-    overflow: auto;
-}
-
-.page_subsection h1 {
-    text-decoration: none;
-    margin-top: 0px;
-
-}
-
-.page_subsection h2 {
-}
-
-.subsectionHiddenForPrivacy {
-    margin: 5px;
-}
-
-
-/*List pages*/
-.person_list_page .main_heading {
-    display: none;
-}
-
-.person_list_page #paging_menu_row_id, .family_list_page #paging_menu_row_id {
-    text-align: center;
-    margin: 5px;
-}
-
-.person_list_page .paging_menu_item, .family_list_page .paging_menu_item {
-    list-style: none;
-    display: inline-block;
-}
-
-.person_list_page .paging_menu_item a, .family_list_page .paging_menu_item a {
-}
-
-.family_list_page .main_heading {
-    display: none;
-}
-
-.source_list_page .main_heading {
-    display: none;
-}
-
-/* Added on 2025-03-24 */
-.paging_menu_item {
-    display: inline-block;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 10px 15px;
-    margin: 5px;
-    background-color: #f8f9fa;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.paging_menu_item a {
-    text-decoration: none;
-    color: #007BFF;
-    font-weight: bold;
-}
-
-.paging_menu_item:hover {
-    background-color: #d1e7fd;
-}
-
-
-
-/*Person page*/
-.person_page .main_heading img {
-    float: right;
-    max-height: 128px;
-    max-width: 128px;
-}
-
-.person_page .main_heading {
-    overflow: auto;
-}
-
-#person_chart_canvas_id {
-    margin: 5px auto;
-    display: block;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-}
-
-#person_id_id {
-    text-align: center;
-    display: block;
-}
-
 
 /*Media subsection*/
 .media_subsection {
@@ -517,421 +366,60 @@ table tr:nth-child(even) > td {
     border-radius: 50%;
 }
 
-#prevBtn { left: 10px; }
-#nextBtn { right: 10px; }
 
-/* Lightbox Styles */
-.lightbox {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    align-items: center;
-    justify-content: center;
-}
-
-.lightbox img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 8px;
-}
-
-#closeLightbox {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 30px;
-    color: white;
-    cursor: pointer;
-}
-
-
-/*Homepage*/
-#home_page_links {
-    text-align: left;
-    padding: 5px;
-}
-
-#home_page_creation_date_id {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-}
-
-#gedcom_file_id {
-    text-align: center;
-    margin-bottom: 10px;
-    margin: 5px;
-    padding: 5px;
-}
-
-#gedcom_file_id a {
-    display: inline-block;
-}
-
-#home_page_links_id {
-    margin-top: 10px;
-}
-
-#home_page_links_id h2 {
-    display: none;
-}
-
-#home_page_links_ul_id {
-    margin: 0px auto;
-    padding: 5px;
-    overflow: auto;
-}
-
-#home_page_links_ul_id li {
-    list-style: none;
-    float: left;
-    width: 46%;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-    margin: 2%;
-}
-
-#home_page_links_ul_id li a {
-
-    font-size: 140%;
-    display: block;
-    overflow: auto;
-    padding: 5px;
-    margin: 5px;
-}
-
-#home_page_links_ul_id a div + div {
-    margin-top: 5px;
-    font-size: 120%;
-
-}
-
-#home_page_links_ul_id li a:hover {
-}
-
-#home_page_links_ul_id li a div {
-    text-align: center;
-}
-
-#home_page_links_ul_id img {
-    float: left;
-    max-height: 64px;
-    max-width: 64px;
-}
-
-#home_page_comment_id {
-    margin-top: 10px;
-    padding: 0px;
-}
-
-#home_page_comment_id div {
-    margin: 5px;
-    padding: 5px;
-}
-
-#home_page_comment_id h2 {
-
-    margin: 0px;
-    padding: 5px 5px 0px 5px;
-}
-
-
-/*Mediapage*/
-#media_view_subsection_id {
-    text-align: center;
-    margin: 10px;
-}
-
-#media_view_subsection_id a {
-    display: inline-block;
-}
-
-#media_view_subsection_id img {
-    display: block;
-    margin: 10px auto;
-    max-width: 500px;
-}
-
-#media_view_subsection_id object {
-    outline: none;
-}
-
-/*Contactpage*/
-.contact_page .page_subsection {
-    margin-top: 10px;
-    padding: 0px;
-    margin-left: auto;
-    margin-right: auto;
-    min-width: 400px;
-    max-width: 500px;
-}
-
-/*Chartpage*/
-#chart_view_subsection_id {
-    overflow: auto;
-    margin: 10px;
-}
-
-#chart_view_subsection_id img {
-    margin: 0px auto;
-    max-width: 500px;
-    display: block;
-}
-
-/*Statisticspage*/
-.statistics_page .page_subsection {
-    margin-top: 10px;
-    padding: 0px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.statistics_page td {
-    width: 50%;
-}
-
-.statistics_page td:nth-child(2) {
-    text-align: center;
-}
-
-.statistic_chart {
-    margin: 5px;
-    overflow-x: scroll;
-    padding: 5px;
-}
-
-.statistic_chart h3 {
-    padding-bottom: 5px;
-}
-
-.statistic_chart div {
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-}
-
-.statistic_chart img {
-    display: block;
-    margin: 0px auto;
-}
-
-
-/*Footer*/
-#footer_id {
-}
-
-#footer_text_id {
-    text-align: center;
-    padding: 5px;
-    height: 45px;
-    vertical-align: middle;
-    line-height: 45px;
-    overflow: hidden;
-}
-
-
-/*Language selection*/
-#language_id {
-    float: right;
-    width: 43px;
-}
-
-#language_id img {
-    height: 32px;
-    width: 32px;
-    vertical-align: middle;
-}
-
-#language_id ul ul {
-    display: none;
-}
-
-#language_id ul li:hover > ul {
-    display: block;
-}
-
-#language_id ul li:hover {
-}
-
-#language_id ul {
-    padding: 0px;
-    margin: 0px;
-    list-style: none;
-}
-
-#language_id > ul > li {
-    float: left;
-    position: relative;
-    margin-left: 1px;
-}
-
-#language_id ul li a:hover {
-}
-
-#language_id ul li a {
-    display: block;
-    text-decoration: none;
-    width: 42px;
-    height: 45px;
-    line-height: 42px;
-    text-align: center;
-}
-
-#language_id ul li {
-    display: block;
-    text-decoration: none;
-    width: 42px;
-    height: 45px;
-    line-height: 42px;
-    text-align: center;
-}
-
-#language_id ul ul {
-    padding: 0;
-    position: absolute;
-    bottom: 100%;
-}
-
-#language_id ul ul li {
-    float: none;
-}
-
-/*Markers*/
-.not_exported {
-    color: #999;
-}
-
-/* Gallery container */
-.gallery-container {
-    position: relative;
-    max-width: 600px;
-    margin: auto;
-}
-
-/* Hide all slides by default */
-.gallery-slide {
-    display: none;
-    position: absolute;
-    width: 100%;
-    transition: opacity 0.5s ease-in-out;
-}
-
-/* Show the active slide */
-.gallery-slide.active {
-    display: block;
-    opacity: 1;
-}
-
-/* Navigation buttons */
-.gallery-prev, .gallery-next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 10px;
-    color: white;
-    background: rgba(0, 0, 0, 0.5);
-    border: none;
-    font-size: 18px;
-    transform: translateY(-50%);
-    z-index: 2;
-    transition: background 0.3s;
-}
-
-.gallery-prev:hover, .gallery-next:hover {
-    background: rgba(0, 0, 0, 0.8);
-}
-
-.gallery-prev {
-    left: 0;
-}
-
-.gallery-next {
-    right: 0;
-}
-
-/* Thumbnail container */
-.gallery-thumbnails {
-    display: flex;
-    justify-content: center;
-    margin-top: 10px;
-}
-
-.gallery-thumbnail {
-    width: 60px;
-    height: 60px;
-    margin: 5px;
-    cursor: pointer;
-    transition: opacity 0.3s;
-}
-
-.gallery-thumbnail:hover {
-    opacity: 0.7;
-}
-
-/* Active thumbnail highlight */
-.gallery-thumbnail.active {
-    border: 2px solid red;
-}
-
-/* buttons */
-.back-button {
-    display: block;
-    margin: 10px auto;
-    padding: 10px 20px;
-    font-size: 20px;
-    background-color: #d9534f;
-    color: white;
-    border: none;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background 0.3s;
-}
-
-.back-button:hover {
-    background-color: #c9302c;
-}
-
-/* Tooltip adjustments */
-.menu_item[data-tooltip]::after {
-    z-index: 100; /* Thấp hơn dropdown */
-    pointer-events: none; /* Cho phép click xuyên qua tooltip */
-}
-
-/* Search dropdown adjustments */
-.search-dropdown {
-    z-index: 1000; /* Cao hơn tooltip */
-    position: absolute;
-    top: calc(100% + 5px); /* Đẩy xuống dưới tooltip */
-}
-
-/* Tắt tooltip khi search active */
-.search_item.active-search .menu_item::after {
-    opacity: 0 !important;
-    visibility: hidden !important;
-}
-
-/* thêm vào 2025-03-30 01:13 */
-.highlight {
-    background-color: yellow;
-    font-weight: bold;
-    color: #000;
-}
-
-.result-item {
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.result-item:hover {
-    background-color: #f0f0f0;
-}
-
-.no-results {
-    padding: 8px;
-    color: #666;
-    font-style: italic;
+/* ==================== */
+/* 8. UTILITY CLASSES */
+/* ==================== */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.hidden { display: none; }
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+/* ==================== */
+/* 9. MOBILE SPECIFIC STYLES */
+/* ==================== */
+@media (max-width: 768px) {
+    /* Header adjustments */
+    #header_text_id h1 {
+        font-size: 2rem;
+    }
+    
+    /* Form elements */
+    input, select, textarea {
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* Hide less important elements */
+    .desktop-only {
+        display: none;
+    }
+}
+
+/* ==================== */
+/* 10. PRINT STYLES */
+/* ==================== */
+@media print {
+    body {
+        background: none;
+        font-size: 12pt;
+    }
+    
+    #view_id {
+        background: none;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        border-radius: 0;
+    }
+    
+    .no-print {
+        display: none;
+    }
 }

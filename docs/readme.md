@@ -91,3 +91,17 @@ Gửi Pull Request hoặc báo lỗi tại Issues
   ]
 }
 
+```mermaid
+graph TD
+    A[Đăng nhập] --> B{Phân quyền}
+    B -->|User| C[Xem gia phả]
+    B -->|Admin| D[Quản lý ảnh]
+```
+
+# Test Mermaid
+```mermaid
+pie
+    title Tỉ lệ người dùng
+    "Admin" : 15
+    "User" : 85
+```
