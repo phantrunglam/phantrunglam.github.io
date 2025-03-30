@@ -109,3 +109,137 @@ button, .button, .back-button {
 body {
     background-attachment: scroll;
 }
+
+/* ==================== */
+/* BACK & NAV BUTTONS IMPROVEMENT */
+/* ==================== */
+
+/* Base button styles */
+#prevBtn, #nextBtn, .back-button {
+    position: fixed;
+    bottom: 20px;
+    padding: 15px 25px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 50px;
+    border: none;
+    background-color: #4a6fa5;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    min-width: 120px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+/* Specific positioning */
+#prevBtn {
+    left: 20px;
+    right: auto;
+}
+
+#nextBtn {
+    right: 20px;
+    left: auto;
+}
+
+/* Back button specific */
+.back-button {
+    position: relative;
+    bottom: auto;
+    display: inline-block;
+    margin: 20px auto;
+}
+
+/* Hover/focus effects */
+#prevBtn:hover, #nextBtn:hover, 
+.back-button:hover,
+#prevBtn:focus, #nextBtn:focus, 
+.back-button:focus {
+    background-color: #3a5a8f;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Active state */
+#prevBtn:active, #nextBtn:active, 
+.back-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Mobile specific adjustments */
+@media (max-width: 768px) {
+    #prevBtn, #nextBtn {
+        bottom: 15px;
+        padding: 18px 30px;
+        font-size: 20px;
+        min-width: 140px;
+    }
+    
+    /* For very small screens */
+    @media (max-width: 480px) {
+        #prevBtn, #nextBtn {
+            padding: 16px 20px;
+            min-width: 100px;
+            font-size: 18px;
+        }
+    }
+}
+
+/* Icon enhancement (optional) */
+#prevBtn::before, #nextBtn::after {
+    content: "";
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: 0 8px;
+    vertical-align: middle;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+#prevBtn::before {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/></svg>');
+}
+
+#nextBtn::after {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white"><path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/></svg>');
+}
+
+/* Thêm vào mobile.css */
+#menu_row_id {
+    flex-direction: column;
+    background: #f8f9fa;
+    width: 100%;
+}
+
+#hamburger-btn {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    #hamburger-btn {
+        display: block;
+    }
+    
+    #menu_row_id {
+        display: none;
+    }
+    
+    #menu_row_id.show {
+        display: block;
+    }
+    
+    .menu_item {
+        width: 100%;
+        text-align: left;
+        padding: 10px 15px;
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .menu_item::after {
+        display: none !important; /* Ẩn tooltip trên mobile */
+    }
+}

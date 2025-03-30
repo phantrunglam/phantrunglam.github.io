@@ -1,6 +1,6 @@
-// menu.js - Tạo menu động với responsive support
+// menu.js - Tạo menu động với tooltips và modal help
 document.addEventListener('DOMContentLoaded', function() {
-    // Tạo menu HTML (giữ nguyên)
+    // Tạo menu HTML
     const menuHTML = `
     <ul id="menu_row_id">
         <li class="menu_item active_menu_item" data-tooltip="Trang chủ gia phả">
@@ -47,107 +47,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Thiết lập modal help
         setupHelpModal();
-        
-        // Thêm responsive support
-        setupResponsiveMenu();
     }
 
     // Khôi phục trạng thái active menu
     highlightActiveMenu();
 });
 
-// ========================
-// RESPONSIVE MENU SUPPORT
-// ========================
-function setupResponsiveMenu() {
-    const mobileBreakpoint = 768;
-    let mobileCSSLoaded = false;
-    
-    // Kiểm tra kích thước màn hình
-    function checkViewport() {
-        const isMobile = window.innerWidth <= mobileBreakpoint;
-        
-        if (isMobile) {
-            loadMobileCSS();
-            convertToMobileMenu();
-        } else {
-            convertToDesktopMenu();
-        }
-    }
-    
-    // Load mobile.css khi cần
-    function loadMobileCSS() {
-        if (!mobileCSSLoaded) {
-            const link = document.createElement('link');
-            link.rel = 'stylesheet';
-            link.href = 'mobile.css';
-            document.head.appendChild(link);
-            mobileCSSLoaded = true;
-        }
-    }
-    
-    // Chuyển đổi sang menu mobile
-    function convertToMobileMenu() {
-        const menu = document.getElementById('menu_row_id');
-        if (!menu) return;
-        
-        // Thêm hamburger button nếu chưa có
-        if (!document.getElementById('hamburger-btn')) {
-            const hamburger = document.createElement('button');
-            hamburger.id = 'hamburger-btn';
-            hamburger.innerHTML = '☰ Menu';
-            hamburger.style.cssText = `
-                display: block;
-                width: 100%;
-                padding: 10px;
-                background: #2c3e50;
-                color: white;
-                border: none;
-                font-size: 16px;
-                cursor: pointer;
-            `;
-            
-            menu.parentNode.insertBefore(hamburger, menu);
-            
-            hamburger.addEventListener('click', function() {
-                menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-            });
-        }
-        
-        // Ẩn menu ban đầu trên mobile
-        menu.style.display = 'none';
-    }
-    
-    // Khôi phục menu desktop
-    function convertToDesktopMenu() {
-        const menu = document.getElementById('menu_row_id');
-        const hamburger = document.getElementById('hamburger-btn');
-        
-        if (menu) {
-            menu.style.display = '';
-        }
-        
-        if (hamburger) {
-            hamburger.remove();
-        }
-    }
-    
-    // Kiểm tra ngay khi tải trang
-    checkViewport();
-    
-    // Theo dõi thay đổi kích thước cửa sổ
-    window.addEventListener('resize', function() {
-        // Sử dụng debounce để tối ưu hiệu suất
-        clearTimeout(this.resizeTimer);
-        this.resizeTimer = setTimeout(checkViewport, 200);
-    });
-}
-
-// ========================
-// CÁC HÀM CŨ GIỮ NGUYÊN
-// ========================
 function initTooltips() {
-    // Giữ nguyên như cũ
     const tooltipStyle = document.createElement('style');
     tooltipStyle.textContent = `
         /* Tooltip cho các menu item thông thường */
@@ -219,7 +125,6 @@ function initTooltips() {
 }
 
 function setupHelpModal() {
-    // Giữ nguyên như cũ
     const trigger = document.getElementById('help-trigger');
     if (!trigger) return;
 
@@ -304,7 +209,6 @@ function setupHelpModal() {
 }
 
 function highlightActiveMenu() {
-    // Giữ nguyên như cũ
     const currentPath = window.location.pathname;
     const menuItems = document.querySelectorAll('.menu_item');
     
