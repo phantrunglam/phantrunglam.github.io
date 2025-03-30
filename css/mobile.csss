@@ -243,3 +243,24 @@ body {
         display: none !important; /* Ẩn tooltip trên mobile */
     }
 }
+
+/* Mobile search adjustments */
+@media (max-width: 768px) {
+    .search-dropdown {
+        width: 100vw;
+        left: -10px;
+        max-height: 50vh;
+    }
+    
+    .search_item {
+        position: static;
+    }
+    
+    .search_item::after {
+        display: none !important;
+    }
+    
+    .result-item {
+        padding: 12px 15px;
+    }
+}

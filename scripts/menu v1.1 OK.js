@@ -80,26 +80,9 @@ function setupResponsiveMenu() {
         if (!mobileCSSLoaded) {
             const link = document.createElement('link');
             link.rel = 'stylesheet';
-            // Sử dụng đường dẫn tuyệt đối từ root
-            link.href = '/css/mobile.css';
+            link.href = 'mobile.css';
             document.head.appendChild(link);
             mobileCSSLoaded = true;
-            
-            // Kiểm tra lỗi load CSS
-            link.onerror = () => {
-                console.error('Failed to load mobile.css');
-                // Fallback nếu cần
-                const fallbackStyle = document.createElement('style');
-                fallbackStyle.textContent = `
-                    /* Mobile fallback styles */
-                    @media (max-width: 768px) {
-                        #menu_row_id {
-                            flex-direction: column;
-                        }
-                    }
-                `;
-                document.head.appendChild(fallbackStyle);
-            };
         }
     }
     
@@ -164,63 +147,79 @@ function setupResponsiveMenu() {
 // CÁC HÀM CŨ GIỮ NGUYÊN
 // ========================
 function initTooltips() {
-    const style = document.createElement('style');
-    style.textContent = `
+    const tooltipStyle = document.createElement('style');
+    tooltipStyle.textContent = `
+        /* Tooltip styles */
+        .menu_item {
+            position: relative;
+        }
+        .menu_item::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s, visibility 0.3s;
+            z-index: 100;
+            pointer-events: none;
+        }
+        .menu_item:hover::after {
+            opacity: 1;
+            visibility: visible;
+        }
+
         /* Search dropdown styles */
         .search-dropdown {
+            position: absolute;
+            top: calc(100% + 5px);
+            left: 0;
+            width: 100%;
+            max-height: 300px;
+            overflow-y: auto;
             background: white;
             border: 1px solid #ddd;
             border-radius: 4px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            max-height: 60vh;
-            overflow-y: auto;
-            width: 100%;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: none;
             z-index: 1000;
         }
-        
-        .result-item {
-            padding: 10px 15px;
-            border-bottom: 1px solid #eee;
-            transition: all 0.2s;
-        }
-        
-        .result-item:hover, 
-        .result-item.highlight {
-            background: #f5f8fa !important;
-        }
-        
-        .result-item a {
-            color: #333;
-            text-decoration: none;
+        .search-dropdown.show {
             display: block;
         }
-        
+        .result-item {
+            padding: 8px 12px;
+            cursor: pointer;
+            border-bottom: 1px solid #eee;
+            transition: background 0.2s;
+        }
+        .result-item:hover, .result-item.highlight {
+            background-color: #f0f0f0;
+        }
+        .no-results {
+            padding: 8px;
+            color: #666;
+            font-style: italic;
+        }
         .match-highlight {
             background-color: #ffeb3b;
             font-weight: bold;
-            padding: 0 2px;
-            border-radius: 2px;
         }
         
-        .no-results {
-            color: #666;
-            padding: 10px;
-            text-align: center;
-        }
-        
-        /* Mobile responsive */
-        @media (max-width: 768px) {
-            .search-dropdown {
-                position: fixed;
-                left: 10px;
-                right: 10px;
-                top: auto !important;
-                width: auto;
-                max-height: 50vh;
-            }
+        /* Tắt tooltip khi search active */
+        .search_item.active-search::after {
+            opacity: 0 !important;
+            visibility: hidden !important;
         }
     `;
-    document.head.appendChild(style);
+    document.head.appendChild(tooltipStyle);
 }
 
 function setupHelpModal() {
