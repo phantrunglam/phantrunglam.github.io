@@ -105,3 +105,15 @@ pie
     "Admin" : 15
     "User" : 85
 ```
+
+
+Trao đổi:
+Tuy nhiên tôi muốn chỉnh sửa sao cho khu vực này chiếm ít diện tích hơn và với bố cục ngang:
+flex-direction: row
+Chia làm 2 cột:
+- cột bên trái là hình đại diện, bên dưới hình đại diện là gedcomid, -- chú ý là không phải nhân vật nào cũng có ảnh đại diện
+- cột bên phải là  
+Hình đại diện bên trái (giữ nguyên thumbnail)
+
+Tiếp theo là Tên nhân vật  
+

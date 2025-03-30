@@ -322,3 +322,84 @@ function highlightActiveMenu() {
         }
     });
 }
+
+// Thêm vào cuối file menu.js
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.getElementById('hamburger-btn');
+    const menu = document.getElementById('menu_row_id');
+    
+    if (hamburger && menu) {
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            menu.classList.toggle('show');
+        });
+        
+        // Đóng menu khi click bên ngoài
+        document.addEventListener('click', function(e) {
+            if (!menu.contains(e.target) && e.target !== hamburger) {
+                hamburger.classList.remove('active');
+                menu.classList.remove('show');
+            }
+        });
+    }
+});
+
+// Thêm vào cuối file menu.js
+document.addEventListener('DOMContentLoaded', function() {
+    // Chỉ thêm trên mobile
+    if (window.innerWidth <= 768) {
+        // Tạo thanh điều hướng
+        const navBar = document.createElement('div');
+        navBar.className = 'mobile-nav-bar';
+        navBar.innerHTML = `
+            <a href="/languages/vn/index.html" class="mobile-nav-btn" title="Trang chủ">
+                <span class="mobile-nav-icon">🏠</span>
+                <span>Trang chủ</span>
+            </a>
+            <a href="javascript:history.back()" class="mobile-nav-btn" title="Quay lại">
+                <span class="mobile-nav-icon">⬅️</span>
+                <span>Quay lại</span>
+            </a>
+            <button class="mobile-nav-btn" id="mobile-menu-btn" title="Menu">
+                <span class="mobile-nav-icon">☰</span>
+                <span>Menu</span>
+            </button>
+        `;
+        document.body.appendChild(navBar);
+        
+        // Kết nối nút menu với menu hiện có
+        const menuBtn = document.getElementById('mobile-menu-btn');
+        const menu = document.getElementById('menu_row_id');
+        const hamburger = document.getElementById('hamburger-btn');
+        
+        if (menuBtn && menu) {
+            menuBtn.addEventListener('click', function() {
+                menu.classList.toggle('show');
+                if (hamburger) {
+                    hamburger.classList.toggle('active');
+                }
+            });
+        }
+        
+        // Đóng menu khi click bên ngoài
+        document.addEventListener('click', function(e) {
+            if (!menu.contains(e.target) && 
+                e.target !== menuBtn && 
+                !menuBtn.contains(e.target)) {
+                menu.classList.remove('show');
+                if (hamburger) hamburger.classList.remove('active');
+            }
+        });
+        
+        // Thêm hiệu ứng active khi chạm
+        const buttons = document.querySelectorAll('.mobile-nav-btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('touchstart', function() {
+                this.style.backgroundColor = '#3a516e';
+            });
+            btn.addEventListener('touchend', function() {
+                this.style.backgroundColor = '';
+            });
+        });
+    }
+});

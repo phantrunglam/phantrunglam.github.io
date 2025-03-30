@@ -423,3 +423,74 @@ th, td {
         display: none;
     }
 }
+
+/* ========== PERSON HEADER IMPROVEMENT ========== */
+.main_heading {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    margin-bottom: 25px;
+    border: 1px solid #eaecef;
+}
+
+.main_heading a {
+    display: inline-block;
+    line-height: 0; /* Fix spacing under image */
+}
+
+.main_heading img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+.main_heading img:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.main_heading h1 {
+    margin: 0;
+    color: #2c3e50;
+    font-size: 1.8rem;
+    font-weight: 600;
+    flex: 1;
+    min-width: 200px;
+}
+
+#person_id_id {
+    display: inline-block;
+    padding: 6px 12px;
+    background-color: #e9ecef;
+    color: #495057;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-family: monospace;
+    margin-top: 8px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .main_heading {
+        flex-direction: column;
+        text-align: center;
+        gap: 15px;
+    }
+    
+    .main_heading h1 {
+        font-size: 1.5rem;
+    }
+    
+    .main_heading img {
+        width: 100px;
+        height: 100px;
+    }
+}
