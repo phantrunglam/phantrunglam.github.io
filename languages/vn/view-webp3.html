@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebP Viewer with Scroll & Zoom</title>
+    <style>
+      body {
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+        overflow: hidden;
+      }
+      .viewer-container {
+        position: relative;
+        width: 90vw;
+        height: 80vh; /* Chiếm 80% chiều cao */
+        border: 2px solid #ccc;
+        background: #fff;
+        overflow: auto; /* Thêm scrollbar khi cần */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .image-wrapper {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      img {
+        max-width: none; /* Để zoom không bị giới hạn */
+        max-height: none;
+        cursor: grab;
+      }
+      .controls {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0, 0, 0, 0.7);
+        padding: 10px;
+        border-radius: 10px;
+      }
+      .controls button {
+        color: white;
+        background: none;
+        border: none;
+        font-size: 18px;
+        cursor: pointer;
+        margin: 0 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="viewer-container" id="viewer">
+      <div class="image-wrapper">
+        <picture>
+          <source srcset="/resources/pdf/pbk_01.webp" type="image/webp" />
+          <img
+            id="image"
+            src="/resources/pdf/pbk_01.jpeg"
+            alt="Image Viewer"
+            loading="lazy"
+          />
+        </picture>
+      </div>
+      <div class="controls">
+        <button onclick="zoomIn()">🔍+</button>
+        <button onclick="zoomOut()">🔍-</button>
+        <button onclick="resetZoom()">🔄</button>
+      </div>
+    </div>
+
+    <script>
+      const img = document.getElementById("image");
+      const viewer = document.getElementById("viewer");
+      let scale = 1;
+
+      function zoomIn() {
+        scale *= 1.2;
+        updateTransform();
+      }
+
+      function zoomOut() {
+        scale /= 1.2;
+        updateTransform();
+      }
+
+      function resetZoom() {
+        scale = 1;
+        img.style.transform = `scale(${scale})`;
+        viewer.scrollLeft = 0;
+        viewer.scrollTop = 0;
+      }
+
+      function updateTransform() {
+        img.style.transform = `scale(${scale})`;
+      }
+
+      // Kéo thả ảnh
+      let isDragging = false;
+      let startX, startY, scrollLeft, scrollTop;
+
+      viewer.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        startX = e.pageX - viewer.offsetLeft;
+        startY = e.pageY - viewer.offsetTop;
+        scrollLeft = viewer.scrollLeft;
+        scrollTop = viewer.scrollTop;
+        viewer.style.cursor = "grabbing";
+      });
+
+      viewer.addEventListener("mouseup", () => {
+        isDragging = false;
+        viewer.style.cursor = "grab";
+      });
+
+      viewer.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - viewer.offsetLeft;
+        const y = e.pageY - viewer.offsetTop;
+        viewer.scrollLeft = scrollLeft - (x - startX);
+        viewer.scrollTop = scrollTop - (y - startY);
+      });
+
+      // Hỗ trợ cuộn chuột để zoom
+      viewer.addEventListener("wheel", (e) => {
+        e.preventDefault();
+        if (e.deltaY < 0) zoomIn();
+        else zoomOut();
+      });
+    </script>
+  </body>
+</html>

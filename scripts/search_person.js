@@ -1,47 +1,100 @@
 document.addEventListener("DOMContentLoaded", function () {
-    let searchInput = document.getElementById("search_input");
-    let searchResults = document.querySelector(".search-dropdown");
+  const searchContainer = document.createElement("div");
+  searchContainer.className = "global-search-container";
+  searchContainer.style.cssText = `
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        display: none;
+        width: 80%;
+        max-width: 600px;
+    `;
 
-    if (!searchInput || !searchResults) {
-        console.error("Search input or results container not found!");
-        return;
-    }
+  searchContainer.innerHTML = `
+        <input type="text" id="search_input" placeholder="Tìm kiếm thành viên..." 
+               style="width: 100%; padding: 10px; font-size: 16px;">
+        <div class="search-dropdown" style="
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-top: 5px;
+            max-height: 60vh;
+            overflow-y: auto;
+            display: none;
+        "></div>
+    `;
 
-    fetch("/scripts/person_list.json")
-        .then(response => response.json())
-        .then(personList => {
-            searchInput.addEventListener("input", function () {
-                let query = this.value.toLowerCase();
-                searchResults.innerHTML = "";
+  document.body.appendChild(searchContainer);
 
-                if (query.length < 2) { // Chỉ tìm kiếm nếu có ít nhất 2 ký tự
-                    searchResults.style.display = "none";
-                    return;
-                }
+  const searchInput = document.getElementById("search_input");
+  const searchResults = document.querySelector(".search-dropdown");
 
-                let filteredPersons = personList.filter(person =>
-                    person.person_name.toLowerCase().includes(query) ||
-                    person.person_id.toLowerCase().includes(query) ||
-                    person.person_birthday.includes(query)
-                );
+  // API hỗ trợ cho menu.js
+  window.personSearchAPI = {
+    activate: function () {
+      searchContainer.style.display = "block";
+      searchInput.style.display = "block";
+      searchInput.focus();
+      return true;
+    },
 
-                if (filteredPersons.length === 0) {
-                    searchResults.style.display = "none";
-                    return;
-                }
+    search: function (query) {
+      return new Promise((resolve) => {
+        const results = this.filterPersons(query);
+        resolve(results);
+      });
+    },
 
-                filteredPersons.forEach(person => {
-                    let resultItem = document.createElement("div");
-                    resultItem.classList.add("search-result-item");
-                    resultItem.innerHTML = `<a href="/languages/vn/persons/Person_${person.person_id}.html">
+    filterPersons: function (query) {
+      if (!this.personList || query.length < 2) return [];
 
-                        ${person.person_name} (${person.person_birthday})
-                    </a>`;
-                    searchResults.appendChild(resultItem);
-                });
+      return this.personList.filter(
+        (person) =>
+          person.person_name.toLowerCase().includes(query.toLowerCase()) ||
+          person.person_id.toLowerCase().includes(query.toLowerCase()) ||
+          (person.person_birthday && person.person_birthday.includes(query))
+      );
+    },
 
-                searchResults.style.display = "block";
-            });
-        })
-        .catch(error => console.error("Error loading person list:", error));
+    personList: null,
+  };
+
+  // Load dữ liệu
+  fetch("/scripts/person_list.json")
+    .then((response) => response.json())
+    .then((personList) => {
+      window.personSearchAPI.personList = personList;
+
+      searchInput.addEventListener("input", function () {
+        const query = this.value.trim();
+        searchResults.innerHTML = "";
+
+        const results = window.personSearchAPI.filterPersons(query);
+
+        if (results.length === 0) {
+          searchResults.style.display = "none";
+          return;
+        }
+
+        results.forEach((person) => {
+          const item = document.createElement("div");
+          item.className = "search-result-item";
+          item.innerHTML = `
+                        <a href="/languages/vn/persons/Person_${person.person_id}.html"
+                           style="display: block; padding: 10px; color: #333; text-decoration: none;">
+                            ${person.person_name} (${person.person_birthday})
+                        </a>
+                    `;
+          searchResults.appendChild(item);
+        });
+
+        searchResults.style.display = "block";
+      });
+    })
+    .catch((error) => {
+      console.error("Error loading person list:", error);
+      window.personSearchAPI.personList = [];
+    });
 });

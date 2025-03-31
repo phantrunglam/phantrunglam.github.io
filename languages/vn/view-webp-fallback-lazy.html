@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Universal Image Viewer (WebP + Fallback)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #f5f5f5;
+        height: 100vh;
+      }
+      h1 {
+        color: #333;
+        margin-bottom: 20px;
+      }
+      .image-viewer-container {
+        width: 100%;
+        max-width: 800px;
+        height: 80vh; /* Chiếm 80% chiều cao màn hình */
+        margin: 0 auto;
+        overflow: hidden;
+        border: 1px solid #ddd;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background: white;
+        position: relative;
+      }
+      .image-wrapper {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        cursor: grab;
+        touch-action: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      #webp-image,
+      #fallback-image {
+        max-width: 100%;
+        max-height: 100%;
+        transition: transform 0.1s;
+        transform-origin: center;
+        display: block; /* Ẩn ban đầu */
+      }
+      .controls {
+        margin-top: 15px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      button {
+        padding: 10px 20px;
+        background: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background: #45a049;
+      }
+      .zoom-info {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #666;
+      }
+      @media (max-width: 600px) {
+        .image-viewer-container {
+          max-width: 100%;
+        }
+        button {
+          padding: 12px 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Universal Image Viewer</h1>
+    <div class="image-viewer-container">
+      <div class="image-wrapper" id="image-wrapper">
+        <!-- WebP (Ưu tiên hiển thị trước) -->
+        <img
+          id="webp-image"
+          src="/resources/charts/pbk_01.webp"
+          alt="WebP Image"
+          loading="lazy"
+        />
+        <!-- Fallback JPEG/PNG (Hiển thị nếu WebP không hỗ trợ) -->
+        <img
+          id="fallback-image"
+          src="/resources/charts/pbk_01.jepg"
+          alt="Fallback Image"
+          loading="lazy"
+        />
+      </div>
+    </div>
+    <div class="controls">
+      <button id="zoom-in">Zoom In (+)</button>
+      <button id="zoom-out">Zoom Out (-)</button>
+      <button id="reset-zoom">Reset Zoom</button>
+    </div>
+    <div class="zoom-info">
+      Zoom: <span id="zoom-level">100%</span> | Format:
+      <span id="image-format">Detecting...</span>
+    </div>
+
+    <script>
+      // ======= Cấu hình ảnh ========
+      const webpImage = document.getElementById("webp-image");
+      const fallbackImage = document.getElementById("fallback-image");
+      const imageWrapper = document.getElementById("image-wrapper");
+      const zoomInBtn = document.getElementById("zoom-in");
+      const zoomOutBtn = document.getElementById("zoom-out");
+      const resetZoomBtn = document.getElementById("reset-zoom");
+      const zoomLevelDisplay = document.getElementById("zoom-level");
+      const imageFormatDisplay = document.getElementById("image-format");
+
+      let activeImage = null;
+      let scale = 1.0;
+      let isDragging = false;
+      let startX, startY, scrollLeft, scrollTop;
+
+      // ======= Kiểm tra hỗ trợ WebP ========
+      // ======= CẢI TIẾN PHÁT HIỆN WEBP ========
+      async function checkWebPSupport() {
+        // Sử dụng cả 2 phương pháp để chính xác
+        try {
+          // Phương pháp 1: Kiểm tra bằng canvas
+          const canvas = document.createElement("canvas");
+          if (canvas.toDataURL("image/webp").indexOf("data:image/webp") === 0) {
+            return true;
+          }
+
+          // Phương pháp 2: Tải ảnh WebP test
+          const testImage = new Image();
+          await new Promise((resolve) => {
+            testImage.onload = testImage.onerror = () => {
+              resolve(testImage.height === 2);
+            };
+            testImage.src =
+              "data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==";
+          });
+          return true;
+        } catch {
+          return false;
+        }
+      }
+
+      // ======= Khởi tạo trình xem ảnh ========
+      // ======= KHỞI TẠO TRÌNH XEM ========
+      async function initImageViewer() {
+        try {
+          const supportsWebP = await checkWebPSupport();
+          console.log("WebP supported:", supportsWebP);
+
+          // THAY ĐỔI QUAN TRỌNG: Tải ảnh trước khi quyết định hiển thị
+          const webpLoaded = await loadImage(webpImage);
+          const fallbackLoaded = await loadImage(fallbackImage);
+
+          if (supportsWebP && webpLoaded) {
+            fallbackImage.style.display = "none";
+            activeImage = webpImage;
+            imageFormatDisplay.textContent = "WebP";
+          } else if (fallbackLoaded) {
+            webpImage.style.display = "none";
+            activeImage = fallbackImage;
+            imageFormatDisplay.textContent = "JPEG/PNG (Fallback)";
+          } else {
+            // Hiển thị thông báo nếu không tải được ảnh nào
+            imageWrapper.innerHTML =
+              '<p style="color:red">Không thể tải ảnh</p>';
+            return;
+          }
+
+          resetZoom();
+        } catch (error) {
+          console.error("Lỗi khởi tạo:", error);
+        }
+      }
+
+      // Hàm kiểm tra tải ảnh
+      function loadImage(imgElement) {
+        return new Promise((resolve) => {
+          imgElement.onload = () => resolve(true);
+          imgElement.onerror = () => resolve(false);
+          // Kích hoạt kiểm tra nếu ảnh đã được tải
+          if (imgElement.complete) {
+            resolve(imgElement.naturalWidth > 0);
+          }
+        });
+      }
+
+      // ======= Chức năng Zoom ========
+      function updateZoom() {
+        activeImage.style.transform = `scale(${scale})`;
+        zoomLevelDisplay.textContent = `${Math.round(scale * 100)}%`;
+      }
+
+      function resetZoom() {
+        scale = 1.0;
+        activeImage.style.transform = "scale(1)";
+        imageWrapper.scrollLeft =
+          imageWrapper.scrollWidth / 2 - imageWrapper.clientWidth / 2;
+        imageWrapper.scrollTop =
+          imageWrapper.scrollHeight / 2 - imageWrapper.clientHeight / 2;
+        zoomLevelDisplay.textContent = "100%";
+      }
+
+      zoomInBtn.addEventListener("click", () => {
+        scale = Math.min(scale + 0.25, 4);
+        updateZoom();
+      });
+
+      zoomOutBtn.addEventListener("click", () => {
+        scale = Math.max(scale - 0.25, 0.25);
+        updateZoom();
+      });
+
+      resetZoomBtn.addEventListener("click", resetZoom);
+
+      // ======= Kéo ảnh để di chuyển ========
+      imageWrapper.addEventListener("mousedown", (e) => {
+        if (scale <= 1) return;
+        isDragging = true;
+        startX = e.pageX - imageWrapper.offsetLeft;
+        startY = e.pageY - imageWrapper.offsetTop;
+        scrollLeft = imageWrapper.scrollLeft;
+        scrollTop = imageWrapper.scrollTop;
+        imageWrapper.style.cursor = "grabbing";
+        e.preventDefault();
+      });
+
+      imageWrapper.addEventListener("mousemove", (e) => {
+        if (!isDragging || scale <= 1) return;
+        e.preventDefault();
+        const x = e.pageX - imageWrapper.offsetLeft;
+        const y = e.pageY - imageWrapper.offsetTop;
+        const walkX = (x - startX) * 2;
+        const walkY = (y - startY) * 2;
+        imageWrapper.scrollLeft = scrollLeft - walkX;
+        imageWrapper.scrollTop = scrollTop - walkY;
+      });
+
+      imageWrapper.addEventListener("mouseup", () => {
+        isDragging = false;
+        imageWrapper.style.cursor = "grab";
+      });
+
+      // ======= Hỗ trợ Mobile ========
+      let initialDistance = null;
+
+      imageWrapper.addEventListener("touchstart", (e) => {
+        if (e.touches.length === 2) {
+          initialDistance = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+        }
+      });
+
+      imageWrapper.addEventListener(
+        "touchmove",
+        (e) => {
+          if (e.touches.length === 2) {
+            e.preventDefault();
+            const currentDistance = Math.hypot(
+              e.touches[0].clientX - e.touches[1].clientX,
+              e.touches[0].clientY - e.touches[1].clientY
+            );
+            if (initialDistance) {
+              const newScale = scale * (currentDistance / initialDistance);
+              scale = Math.min(Math.max(newScale, 0.5), 8);
+              updateZoom();
+            }
+            initialDistance = currentDistance;
+          }
+        },
+        { passive: false }
+      );
+
+      imageWrapper.addEventListener("dblclick", resetZoom);
+
+      // Khởi động trình xem
+      // Khởi động khi trang tải xong
+      document.addEventListener("DOMContentLoaded", initImageViewer);
+    </script>
+  </body>
+</html>

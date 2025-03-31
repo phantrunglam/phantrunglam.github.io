@@ -1,0 +1,13 @@
+{
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "Format All HTML Files",
+        "command": "prettier",
+        "args": ["--write", "**/*.html"],
+        "problemMatcher": []
+      }
+    ]
+  }
+}

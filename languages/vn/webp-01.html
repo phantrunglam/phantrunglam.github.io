@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Universal Image Viewer (Fixed)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #f5f5f5;
+        height: 100vh;
+      }
+      /* ... (giữ nguyên các style khác) ... */
+      #webp-image,
+      #fallback-image {
+        max-width: 100%;
+        max-height: 100%;
+        transition: transform 0.1s;
+        transform-origin: center;
+        /* THAY ĐỔI QUAN TRỌNG: Hiển thị cả hai ảnh ban đầu */
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ... (phần HTML giữ nguyên) ... -->
+
+    <script>
+      // ======= CẢI TIẾN PHÁT HIỆN WEBP ========
+      async function checkWebPSupport() {
+        // Sử dụng cả 2 phương pháp để chính xác
+        try {
+          // Phương pháp 1: Kiểm tra bằng canvas
+          const canvas = document.createElement("canvas");
+          if (canvas.toDataURL("image/webp").indexOf("data:image/webp") === 0) {
+            return true;
+          }
+
+          // Phương pháp 2: Tải ảnh WebP test
+          const testImage = new Image();
+          await new Promise((resolve) => {
+            testImage.onload = testImage.onerror = () => {
+              resolve(testImage.height === 2);
+            };
+            testImage.src =
+              "data:image/webp;base64,UklGRhoAAABXRUJQVlA4TA0AAAAvAAAAEAcQERGIiP4HAA==";
+          });
+          return true;
+        } catch {
+          return false;
+        }
+      }
+
+      // ======= KHỞI TẠO TRÌNH XEM ========
+      async function initImageViewer() {
+        try {
+          const supportsWebP = await checkWebPSupport();
+          console.log("WebP supported:", supportsWebP);
+
+          // THAY ĐỔI QUAN TRỌNG: Tải ảnh trước khi quyết định hiển thị
+          const webpLoaded = await loadImage(webpImage);
+          const fallbackLoaded = await loadImage(fallbackImage);
+
+          if (supportsWebP && webpLoaded) {
+            fallbackImage.style.display = "none";
+            activeImage = webpImage;
+            imageFormatDisplay.textContent = "WebP";
+          } else if (fallbackLoaded) {
+            webpImage.style.display = "none";
+            activeImage = fallbackImage;
+            imageFormatDisplay.textContent = "JPEG/PNG (Fallback)";
+          } else {
+            // Hiển thị thông báo nếu không tải được ảnh nào
+            imageWrapper.innerHTML =
+              '<p style="color:red">Không thể tải ảnh</p>';
+            return;
+          }
+
+          resetZoom();
+        } catch (error) {
+          console.error("Lỗi khởi tạo:", error);
+        }
+      }
+
+      // Hàm kiểm tra tải ảnh
+      function loadImage(imgElement) {
+        return new Promise((resolve) => {
+          imgElement.onload = () => resolve(true);
+          imgElement.onerror = () => resolve(false);
+          // Kích hoạt kiểm tra nếu ảnh đã được tải
+          if (imgElement.complete) {
+            resolve(imgElement.naturalWidth > 0);
+          }
+        });
+      }
+
+      // ... (phần code zoom và controls giữ nguyên) ...
+
+      // Khởi động khi trang tải xong
+      document.addEventListener("DOMContentLoaded", initImageViewer);
+    </script>
+  </body>
+</html>

@@ -197,3 +197,78 @@ body {
         padding-bottom: max(8px, env(safe-area-inset-bottom));
     }
 }
+
+/* == Add SubMenu Search == *//* ========== SEARCH SUBMENU - MULTI PLATFORM ========== */
+.search-parent-item {
+    position: relative;
+}
+
+/* Desktop/Tablet (hiển thị ngang) */
+@media (min-width: 769px) {
+    .search-submenu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: white;
+        min-width: 200px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        z-index: 1000;
+        border-radius: 4px;
+        padding: 5px 0;
+    }
+    
+    .search-parent-item:hover .search-submenu {
+        display: block;
+    }
+    
+    .search-submenu li {
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .search-submenu a {
+        padding: 8px 15px;
+        white-space: nowrap;
+    }
+}
+
+/* Mobile (hiển thị dọc) */
+@media (max-width: 768px) {
+    .search-submenu {
+        display: none;
+        position: static;
+        background: #f8f9fa;
+        width: 100%;
+        padding: 0;
+        box-shadow: none;
+    }
+    
+    .search-submenu.show {
+        display: block;
+    }
+    
+    .search-submenu li {
+        border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .search-submenu a {
+        padding: 12px 20px;
+    }
+}
+
+/* Common styles for all platforms */
+.search-submenu {
+    list-style: none;
+    margin: 0;
+}
+
+.search-submenu a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    transition: background 0.2s;
+}
+
+.search-submenu a:hover {
+    background-color: #f0f0f0;
+}

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebP Image Viewer with Zoom</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: #f5f5f5;
+      }
+      h1 {
+        color: #333;
+      }
+      .image-viewer-container {
+        width: 100%;
+        max-width: 90%;
+        margin: 20px auto;
+        overflow: hidden;
+        border: 1px solid #ddd;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        background: white;
+        position: relative;
+      }
+      .image-wrapper {
+        width: 100%;
+        overflow: auto;
+        cursor: grab;
+        touch-action: none; /* Cho phép pinch-to-zoom trên mobile */
+      }
+      #webp-image {
+        display: block;
+        width: 100%;
+        height: auto;
+        transition: transform 0.1s;
+        transform-origin: 0 0;
+      }
+      .controls {
+        margin-top: 15px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      button {
+        padding: 8px 15px;
+        background: #4caf50;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background: #45a049;
+      }
+      .zoom-info {
+        margin-top: 10px;
+        font-size: 14px;
+        color: #666;
+      }
+      @media (max-width: 90%) {
+        .image-viewer-container {
+          max-width: 100%;
+        }
+        button {
+          padding: 10px 20px;
+          font-size: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <h1>WebP Image Viewer</h1>
+    <div class="image-viewer-container">
+      <div class="image-wrapper" id="image-wrapper">
+        <img
+          id="webp-image"
+          src="/resources/pdf/pbk_01.webp"
+          alt="Sample WebP Image"
+        />
+      </div>
+    </div>
+    <div class="controls">
+      <button id="zoom-in">Zoom In (+)</button>
+      <button id="zoom-out">Zoom Out (-)</button>
+      <button id="reset-zoom">Reset Zoom</button>
+    </div>
+    <div class="zoom-info">Zoom: <span id="zoom-level">100%</span></div>
+
+    <script>
+      const image = document.getElementById("webp-image");
+      const imageWrapper = document.getElementById("image-wrapper");
+      const zoomInBtn = document.getElementById("zoom-in");
+      const zoomOutBtn = document.getElementById("zoom-out");
+      const resetZoomBtn = document.getElementById("reset-zoom");
+      const zoomLevelDisplay = document.getElementById("zoom-level");
+
+      let scale = 1.0;
+      let isDragging = false;
+      let startX, startY, scrollLeft, scrollTop;
+
+      // === Zoom bằng nút bấm ===
+      zoomInBtn.addEventListener("click", () => {
+        scale += 0.25;
+        updateZoom();
+      });
+
+      zoomOutBtn.addEventListener("click", () => {
+        if (scale > 0.25) {
+          scale -= 0.25;
+          updateZoom();
+        }
+      });
+
+      resetZoomBtn.addEventListener("click", () => {
+        scale = 1.0;
+        updateZoom();
+      });
+
+      function updateZoom() {
+        image.style.transform = `scale(${scale})`;
+        zoomLevelDisplay.textContent = `${Math.round(scale * 100)}%`;
+      }
+
+      // === Kéo ảnh để di chuyển (desktop/mobile) ===
+      imageWrapper.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        startX = e.pageX - imageWrapper.offsetLeft;
+        startY = e.pageY - imageWrapper.offsetTop;
+        scrollLeft = imageWrapper.scrollLeft;
+        scrollTop = imageWrapper.scrollTop;
+        imageWrapper.style.cursor = "grabbing";
+        e.preventDefault();
+      });
+
+      imageWrapper.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - imageWrapper.offsetLeft;
+        const y = e.pageY - imageWrapper.offsetTop;
+        const walkX = (x - startX) * 2;
+        const walkY = (y - startY) * 2;
+        imageWrapper.scrollLeft = scrollLeft - walkX;
+        imageWrapper.scrollTop = scrollTop - walkY;
+      });
+
+      imageWrapper.addEventListener("mouseup", () => {
+        isDragging = false;
+        imageWrapper.style.cursor = "grab";
+      });
+
+      imageWrapper.addEventListener("mouseleave", () => {
+        isDragging = false;
+        imageWrapper.style.cursor = "grab";
+      });
+
+      // === Hỗ trợ Pinch-to-Zoom trên mobile ===
+      let initialDistance = null;
+
+      imageWrapper.addEventListener("touchstart", (e) => {
+        if (e.touches.length === 2) {
+          initialDistance = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+        }
+      });
+
+      imageWrapper.addEventListener("touchmove", (e) => {
+        if (e.touches.length === 2) {
+          e.preventDefault();
+          const currentDistance = Math.hypot(
+            e.touches[0].clientX - e.touches[1].clientX,
+            e.touches[0].clientY - e.touches[1].clientY
+          );
+          if (initialDistance) {
+            const newScale = scale * (currentDistance / initialDistance);
+            if (newScale > 0.25 && newScale < 4) {
+              scale = newScale;
+              updateZoom();
+            }
+          }
+          initialDistance = currentDistance;
+        }
+      });
+
+      // Reset zoom khi chạm 2 lần (double-tap)
+      imageWrapper.addEventListener("dblclick", () => {
+        scale = 1.0;
+        updateZoom();
+      });
+    </script>
+  </body>
+</html>
