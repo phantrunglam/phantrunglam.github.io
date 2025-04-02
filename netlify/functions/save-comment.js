@@ -1,6 +1,8 @@
 const fetch = require("node-fetch");
 
+console.log("Function loaded at:", new Date());
 exports.handler = async (event) => {
+  console.log("Incoming request:", event.body);
   const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
   const REPO = "phantrunglam/phantrunglam"; // Thay bằng repo của bạn
   const FILE_PATH = "public/data/submissions.json"; // Đường dẫn file trong repo
