@@ -1,4 +1,4 @@
-//const fetch = require("node-fetch");
+const fetch = require("node-fetch");
 
 exports.handler = async (event) => {
   console.log("Received event:", JSON.stringify(event, null, 2));
