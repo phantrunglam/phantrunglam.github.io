@@ -11,7 +11,7 @@ form.addEventListener("submit", async (e) => {
   submitBtn.textContent = "Đang gửi...";
 
   try {
-    const response = await fetch("../netlify/functions/save-comment", {
+    const response = await fetch("/.netlify/functions/save-comment", {
       method: "POST",
       body: JSON.stringify({
         name: document.getElementById("name").value,
