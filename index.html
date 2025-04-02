@@ -8,16 +8,23 @@
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script src="/scripts/auth.js"></script>
+    <script>
+      // Đặt ngôn ngữ mặc định là "vn" và chuyển hướng ngay lập tức
+      document.addEventListener("DOMContentLoaded", function () {
+        localStorage.setItem("preferredLanguage", "vn");
+        window.location.href = "/public/contact.html";
+      });
+    </script>
   </head>
   <body>
     <noscript>
       <p>Vui lòng bật JavaScript để xem trang này.</p>
     </noscript>
 
-    // Login form
+    <!-- // Login form
     <button id="loginButton">Đăng nhập</button>
     <button id="logoutButton" style="display: none">Đăng xuất</button>
 
-    <p id="user-info"></p>
+    <p id="user-info"></p> -->
   </body>
 </html>
