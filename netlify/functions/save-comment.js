@@ -2,14 +2,32 @@ const fs = require("fs");
 const path = require("path");
 
 exports.handler = async (event) => {
-  if (event.httpMethod !== "POST") {
-    return { statusCode: 405, body: "Method Not Allowed" };
+  // Xử lý CORS preflight request
+  if (event.httpMethod === "OPTIONS") {
+    return {
+      statusCode: 200,
+      headers: {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Headers": "Content-Type",
+        "Access-Control-Allow-Methods": "POST, OPTIONS",
+      },
+      body: JSON.stringify({ message: "CORS preflight passed" }),
+    };
   }
 
-  const DATA_FILE = path.join(process.cwd(), "data", "submissions.json");
-  const lockFile = DATA_FILE + ".lock";
+  // Chỉ cho phép POST
+  if (event.httpMethod !== "POST") {
+    return {
+      statusCode: 405,
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ error: "Method Not Allowed" }),
+    };
+  }
 
   try {
+    const DATA_FILE = path.join(process.cwd(), "data", "submissions.json");
+    const lockFile = DATA_FILE + ".lock";
+
     // 1. Đợi nếu file đang bị lock
     while (fs.existsSync(lockFile)) {
       await new Promise((resolve) => setTimeout(resolve, 100));

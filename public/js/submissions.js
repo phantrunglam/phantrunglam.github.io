@@ -11,23 +11,32 @@ form.addEventListener("submit", async (e) => {
   submitBtn.textContent = "Đang gửi...";
 
   try {
-    const response = await fetch("/.netlify/functions/save-comment", {
-      method: "POST",
-      body: JSON.stringify({
-        name: document.getElementById("name").value,
-        comment: document.getElementById("comment").value,
-      }),
-    });
+    const response = await fetch(
+      "https://phantrunglam.netlify.app/.netlify/functions/save-comment",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: document.getElementById("name").value,
+          comment: document.getElementById("comment").value,
+        }),
+      }
+    );
 
-    if (response.ok) {
-      form.reset();
-      await loadComments(); // Tải lại danh sách
-    } else {
-      throw new Error("Gửi thất bại");
+    const result = await response.json(); // Luôn parse JSON dù success/error
+
+    if (!response.ok) {
+      throw new Error(result.error || "Gửi thất bại");
     }
+
+    form.reset();
+    await loadComments();
+    alert("Gửi thành công!");
   } catch (error) {
     console.error("Lỗi:", error);
-    alert("Có lỗi xảy ra khi gửi: " + error.message);
+    alert("Lỗi: " + error.message);
   } finally {
     submitBtn.disabled = false;
     submitBtn.textContent = "Gửi";
@@ -37,6 +46,7 @@ form.addEventListener("submit", async (e) => {
 // Hiển thị comments
 function renderComments(comments) {
   commentsList.innerHTML = comments
+    .filter((comment) => comment.status !== "hidden") // Chỉ hiện comment active
     .map(
       (comment) => `
     <div class="comment">
@@ -51,19 +61,27 @@ function renderComments(comments) {
     .join("");
 }
 
-// Tải comments từ JSON
+// Tải comments
 async function loadComments() {
   try {
-    const response = await fetch("/data/submissions.json?t=" + Date.now());
+    const response = await fetch(
+      "https://phantrunglam.netlify.app/data/submissions.json?t=" + Date.now()
+    );
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
     const data = await response.json();
-    renderComments(data.submissions);
+    renderComments(data.submissions || []); // Xử lý case file rỗng
   } catch (error) {
     console.error("Lỗi tải comments:", error);
+    commentsList.innerHTML = `<p class="error">Không tải được bình luận. Vui lòng thử lại sau.</p>`;
   }
 }
 
 // Khởi tạo
-loadComments();
-
-// Auto-refresh mỗi 30s
-setInterval(loadComments, 30000);
+document.addEventListener("DOMContentLoaded", () => {
+  loadComments();
+  setInterval(loadComments, 30000);
+});
