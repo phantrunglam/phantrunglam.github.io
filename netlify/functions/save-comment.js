@@ -30,12 +30,12 @@ exports.handler = async (event) => {
 
   try {
     // 1. Đợi nếu file đang bị lock
-    while (fs.existsSync(lockFile)) {
-      await new Promise((resolve) => setTimeout(resolve, 100));
-    }
+    //while (fs.existsSync(lockFile)) {
+    //  await new Promise((resolve) => setTimeout(resolve, 100));
+    //}
 
     // 2. Tạo lock
-    fs.writeFileSync(lockFile, "");
+    //fs.writeFileSync(lockFile, "");
 
     // 3. Đọc dữ liệu hiện có
     const rawData = fs.readFileSync(DATA_FILE, "utf8");
@@ -60,7 +60,7 @@ exports.handler = async (event) => {
     fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
 
     // 7. Xóa lock
-    fs.unlinkSync(lockFile);
+    //fs.unlinkSync(lockFile);
 
     return {
       statusCode: 200,
@@ -68,7 +68,7 @@ exports.handler = async (event) => {
       headers: { "Content-Type": "application/json" },
     };
   } catch (error) {
-    if (fs.existsSync(lockFile)) fs.unlinkSync(lockFile);
+    //if (fs.existsSync(lockFile)) fs.unlinkSync(lockFile);
     return {
       statusCode: 500,
       body: JSON.stringify({ error: error.message }),
