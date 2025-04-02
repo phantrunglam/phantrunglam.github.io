@@ -5,11 +5,13 @@ exports.handler = async (event) => {
   const REPO = "phantrunglam/phantrunglam"; // Thay bằng repo của bạn
   const FILE_PATH = "public/data/submissions.json"; // Đường dẫn file trong repo
 
+  // 1. Lấy nội dung file hiện tại từ GitHub
+  const apiUrl = `https://api.github.com/repos/phantrunglam/phantrunglam/contents/public/data/submissions.json`;
+  // const apiUrl = `https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`;
+
   try {
-    // 1. Lấy nội dung file hiện tại từ GitHub
-    const apiUrl = `https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`;
     const getRes = await fetch(apiUrl, {
-      headers: { Authorization: `token ${GITHUB_TOKEN}` },
+      headers: { Authorization: `token ${process.env.GITHUB_TOKEN}` },
     });
 
     if (!getRes.ok) throw new Error(`GitHub API error: ${getRes.statusText}`);
