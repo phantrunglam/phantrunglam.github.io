@@ -25,10 +25,18 @@ exports.handler = async (event) => {
   }
 
   //const DATA_FILE = path.join(process.cwd(), "data", "submissions.json");
-  const DATA_FILE = "/data/submissions.json";
-  
+  // Sửa đường dẫn thành tuyệt đối
+  const DATA_FILE = path.join(
+    __dirname,
+    "..",
+    "..",
+    "data",
+    "submissions.json"
+  );
+  // const DATA_FILE = "/data/submissions.json";
+
   // const lockFile = DATA_FILE + ".lock";
-  const lockFile = "/data/submissions.json.lock";
+  // const lockFile = "/data/submissions.json.lock";
 
   try {
     // 1. Đợi nếu file đang bị lock
