@@ -1,0 +1,25 @@
+{
+  "name": "phanngogiapha",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "netlify dev",
+    "test": "echo \"No tests configured\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/phantrunglam/phantrunglam.github.io.git"
+  },
+  "keywords": [
+    "giapha",
+    "family-tree",
+    "vietnam",
+    "genealogy"
+  ],
+  "author": "Phan Trung Lâm",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/phantrunglam/phantrunglam.github.io/issues"
+  },
+  "homepage": "https://github.com/phantrunglam/phantrunglam.github.io#readme",
+  "description": "Website gia phả họ Phan Ngô - Lưu trữ và quản lý thông tin dòng họ"
+}
