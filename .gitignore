@@ -6,3 +6,5 @@ scripts/auth.js
 
 # Local Netlify folder
 .netlify
+netlify/data/*
+!netlify/data/.keep   # Giữ thư mục (tuỳ chọn)

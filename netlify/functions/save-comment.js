@@ -1,87 +1,60 @@
-const fs = require("fs");
-const path = require("path");
+const fetch = require("node-fetch");
 
 exports.handler = async (event) => {
-  // Xử lý CORS preflight request
-  if (event.httpMethod === "OPTIONS") {
-    return {
-      statusCode: 200,
-      headers: {
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Headers": "Content-Type",
-        "Access-Control-Allow-Methods": "POST, OPTIONS",
-      },
-      body: JSON.stringify({ message: "CORS preflight passed" }),
-    };
-  }
-
-  // Chỉ cho phép POST
-  if (event.httpMethod !== "POST") {
-    return {
-      statusCode: 405,
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ error: "Method Not Allowed" }),
-    };
-  }
-
-  //const DATA_FILE = path.join(process.cwd(), "data", "submissions.json");
-  // Sửa đường dẫn thành tuyệt đối
-  const DATA_FILE = path.join(
-    __dirname,
-    "..",
-    "..",
-    "data",
-    "submissions.json"
-  );
-  // const DATA_FILE = "/data/submissions.json";
-
-  // const lockFile = DATA_FILE + ".lock";
-  // const lockFile = "/data/submissions.json.lock";
+  const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+  const REPO = "phantrunglam/phantrunglam"; // Thay bằng repo của bạn
+  const FILE_PATH = "public/data/submissions.json"; // Đường dẫn file trong repo
 
   try {
-    // 1. Đợi nếu file đang bị lock
-    //while (fs.existsSync(lockFile)) {
-    //  await new Promise((resolve) => setTimeout(resolve, 100));
-    //}
+    // 1. Lấy nội dung file hiện tại từ GitHub
+    const apiUrl = `https://api.github.com/repos/${REPO}/contents/${FILE_PATH}`;
+    const getRes = await fetch(apiUrl, {
+      headers: { Authorization: `token ${GITHUB_TOKEN}` },
+    });
 
-    // 2. Tạo lock
-    //fs.writeFileSync(lockFile, "");
+    if (!getRes.ok) throw new Error(`GitHub API error: ${getRes.statusText}`);
 
-    // 3. Đọc dữ liệu hiện có
-    const rawData = fs.readFileSync(DATA_FILE, "utf8");
-    const data = JSON.parse(rawData);
+    const { sha, content } = await getRes.json();
+    const currentContent = Buffer.from(content, "base64").toString("utf8");
+    const currentData = JSON.parse(currentContent);
 
-    // 4. Thêm comment mới
+    // 2. Thêm comment mới
     const newComment = {
-      id: Date.now().toString(),
       ...JSON.parse(event.body),
+      id: Date.now().toString(),
       created_at: new Date().toISOString(),
-      status: "active",
     };
+    currentData.submissions.unshift(newComment);
 
-    data.submissions.unshift(newComment);
+    // 3. Cập nhật file qua GitHub API
+    const updateRes = await fetch(apiUrl, {
+      method: "PUT",
+      headers: {
+        Authorization: `token ${GITHUB_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: "Update submissions via Netlify Function",
+        content: Buffer.from(JSON.stringify(currentData, null, 2)).toString(
+          "base64"
+        ),
+        sha: sha, // Quan trọng: SHA của file hiện tại
+      }),
+    });
 
-    // 5. Giới hạn 100 comment mới nhất
-    if (data.submissions.length > 100) {
-      data.submissions = data.submissions.slice(0, 100);
-    }
-
-    // 6. Ghi lại file
-    fs.writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
-
-    // 7. Xóa lock
-    //fs.unlinkSync(lockFile);
+    if (!updateRes.ok) throw new Error(await updateRes.text());
 
     return {
       statusCode: 200,
-      body: JSON.stringify(newComment),
-      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ success: true }),
     };
   } catch (error) {
-    //if (fs.existsSync(lockFile)) fs.unlinkSync(lockFile);
     return {
       statusCode: 500,
-      body: JSON.stringify({ error: error.message }),
+      body: JSON.stringify({
+        error: "GitHub API Error",
+        details: error.message,
+      }),
     };
   }
 };
