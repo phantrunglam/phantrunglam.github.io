@@ -24,10 +24,9 @@ exports.handler = async (event) => {
     };
   }
 
+  const DATA_FILE = path.join(process.cwd(), "data", "submissions.json");
+  const lockFile = DATA_FILE + ".lock";
   try {
-    const DATA_FILE = path.join(process.cwd(), "data", "submissions.json");
-    const lockFile = DATA_FILE + ".lock";
-
     // 1. Đợi nếu file đang bị lock
     while (fs.existsSync(lockFile)) {
       await new Promise((resolve) => setTimeout(resolve, 100));
