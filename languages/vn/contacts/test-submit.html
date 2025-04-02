@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Liên hệ</title>
+    <link rel="stylesheet" href="/css/default.css" />
+  </head>
+  <body>
+    <h1>Form Liên Hệ</h1>
+
+    <!-- Form Submission -->
+    <form id="submissionForm">
+      <label for="name">Tên:</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required />
+
+      <label for="phone">Số điện thoại:</label>
+      <input type="text" id="phone" name="phone" />
+
+      <label for="comment">Lời nhắn:</label>
+      <textarea id="comment" name="comment" required></textarea>
+
+      <label for="file">Tải ảnh:</label>
+      <input type="file" id="file" name="file" />
+
+      <label for="target">Đối tượng nhận comment:</label>
+      <input
+        type="text"
+        id="target"
+        name="target"
+        placeholder="Tên nhân vật, sự kiện..."
+      />
+
+      <button type="submit">Gửi</button>
+    </form>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="scripts/submit-form.js"></script>
+  </body>
+</html>

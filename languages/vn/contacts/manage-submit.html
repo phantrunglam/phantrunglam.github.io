@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Phan Ngô gia phả - Quản lý đóng góp</title>
+    <link href="/css/default.css" rel="stylesheet" type="text/css" />
+    <link href="/favicon.ico" rel="icon" type="image/x-icon" />
+    <script src="/scripts/back_button.js"></script>
+    <script src="/scripts/menu.js"></script>
+    <script src="/scripts/search_person.js"></script>
+    <style>
+      .management-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      /* Tab navigation */
+      .submission-tabs {
+        display: flex;
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 1.5rem;
+      }
+
+      .submission-tab {
+        padding: 0.75rem 1.5rem;
+        cursor: pointer;
+        border: 1px solid transparent;
+        border-bottom: none;
+        border-radius: 4px 4px 0 0;
+        margin-right: 0.5rem;
+        background: #f5f5f5;
+      }
+
+      .submission-tab.active {
+        background: #fff;
+        border-color: #ddd;
+        border-bottom: 1px solid #fff;
+        margin-bottom: -1px;
+        font-weight: bold;
+      }
+
+      /* Submission list */
+      .submission-list {
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .submission-card {
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 1.5rem;
+        background: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .submission-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.75rem;
+      }
+
+      .submission-author {
+        font-weight: bold;
+        color: #333;
+      }
+
+      .submission-date {
+        color: #666;
+        font-size: 0.9rem;
+      }
+
+      .submission-content {
+        margin-bottom: 1rem;
+        line-height: 1.6;
+      }
+
+      .submission-media {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .submission-media img {
+        max-width: 120px;
+        max-height: 120px;
+        border-radius: 4px;
+        object-fit: cover;
+      }
+
+      .submission-actions {
+        display: flex;
+        gap: 0.75rem;
+        justify-content: flex-end;
+      }
+
+      .action-btn {
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        border: 1px solid #ddd;
+        background: #f9f9f9;
+      }
+
+      .action-btn:hover {
+        background: #eee;
+      }
+
+      .action-btn.delete {
+        color: #d32f2f;
+        border-color: #ffcdd2;
+        background: #ffebee;
+      }
+
+      .action-btn.hide {
+        color: #ff9800;
+        border-color: #ffe0b2;
+        background: #fff3e0;
+      }
+
+      /* Filter and search */
+      .submission-controls {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .search-box {
+        padding: 0.5rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        min-width: 250px;
+      }
+
+      .filter-select {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+      }
+
+      /* Pagination */
+      .pagination {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 2rem;
+      }
+
+      .page-btn {
+        padding: 0.5rem 1rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .page-btn.active {
+        background: #4caf50;
+        color: white;
+        border-color: #4caf50;
+      }
+
+      /* Empty state */
+      .empty-state {
+        text-align: center;
+        padding: 2rem;
+        color: #666;
+        border: 1px dashed #ddd;
+        border-radius: 8px;
+        background: #fafafa;
+      }
+    </style>
+  </head>
+  <body class="contact_page">
+    <div id="view_id">
+      <div id="header_id">
+        <div id="header_inner_id">
+          <div id="header_emblem_left_id">
+            <img alt="" src="/resources/emblem.png" />
+          </div>
+          <div id="header_text_id">
+            <h1>Phan Ngô gia phả</h1>
+          </div>
+        </div>
+      </div>
+      <div id="menu_id"></div>
+      <div id="content_id">
+        <div class="main_heading">
+          <h1>Quản lý đóng góp</h1>
+          <p>Xem và quản lý các đóng góp từ thành viên gia tộc</p>
+        </div>
+
+        <div class="management-container">
+          <!-- Tab navigation -->
+          <div class="submission-tabs">
+            <div class="submission-tab active">Tất cả đóng góp</div>
+            <div class="submission-tab">Đóng góp của tôi</div>
+            <div class="submission-tab">Đóng góp đang chờ</div>
+          </div>
+
+          <!-- Filter and search controls -->
+          <div class="submission-controls">
+            <div>
+              <select class="filter-select">
+                <option value="all">Tất cả trạng thái</option>
+                <option value="active">Đang hiển thị</option>
+                <option value="hidden">Đã ẩn</option>
+              </select>
+              <select class="filter-select">
+                <option value="all">Tất cả đối tượng</option>
+                <option value="person_1001">Phan Văn A</option>
+                <option value="person_1002">Phan Thị B</option>
+              </select>
+            </div>
+            <input
+              type="text"
+              class="search-box"
+              placeholder="Tìm kiếm đóng góp..."
+            />
+          </div>
+
+          <!-- Submission list -->
+          <div class="submission-list">
+            <!-- Example submission card -->
+            <div class="submission-card">
+              <div class="submission-header">
+                <div>
+                  <span class="submission-author">Nguyễn Văn A</span>
+                  <span> - </span>
+                  <span class="submission-linked">Liên kết: Phan Văn B</span>
+                </div>
+                <div class="submission-date">01/04/2025 12:00</div>
+              </div>
+              <div class="submission-content">
+                Đây là một bình luận mẫu về thông tin gia phả cần cập nhật. Tôi
+                có thêm một số thông tin về nhân vật này từ các tài liệu gia
+                đình.
+              </div>
+              <div class="submission-media">
+                <img src="/uploads/image1.jpg" alt="Hình ảnh đính kèm 1" />
+                <img src="/uploads/image2.png" alt="Hình ảnh đính kèm 2" />
+              </div>
+              <div class="submission-actions">
+                <button class="action-btn hide">Ẩn đóng góp</button>
+                <button class="action-btn delete">Xóa đóng góp</button>
+              </div>
+            </div>
+
+            <!-- Another example submission -->
+            <div class="submission-card">
+              <div class="submission-header">
+                <div>
+                  <span class="submission-author">Trần Thị C</span>
+                  <span> - </span>
+                  <span class="submission-linked"
+                    >Liên kết: Sự kiện Họp mặt 2020</span
+                  >
+                </div>
+                <div class="submission-date">28/03/2025 15:30</div>
+              </div>
+              <div class="submission-content">
+                Tôi muốn bổ sung thông tin về sự kiện họp mặt gia đình năm 2020
+                với một số hình ảnh mới.
+              </div>
+              <div class="submission-media">
+                <img src="/uploads/event1.jpg" alt="Hình ảnh sự kiện" />
+              </div>
+              <div class="submission-actions">
+                <button class="action-btn hide">Ẩn đóng góp</button>
+                <button class="action-btn delete">Xóa đóng góp</button>
+              </div>
+            </div>
+
+            <!-- Hidden submission example -->
+            <div
+              class="submission-card"
+              style="opacity: 0.7; background: #fafafa"
+            >
+              <div class="submission-header">
+                <div>
+                  <span class="submission-author">Lê Văn D</span>
+                  <span> - </span>
+                  <span class="submission-linked">Liên kết: Không</span>
+                  <span style="color: #ff9800; margin-left: 0.5rem"
+                    >[Đã ẩn]</span
+                  >
+                </div>
+                <div class="submission-date">20/03/2025 09:15</div>
+              </div>
+              <div class="submission-content">
+                Bình luận này đã bị ẩn bởi quản trị viên.
+              </div>
+              <div class="submission-actions">
+                <button class="action-btn">Hiện lại</button>
+                <button class="action-btn delete">Xóa đóng góp</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Pagination -->
+          <div class="pagination">
+            <button class="page-btn">&laquo;</button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">&raquo;</button>
+          </div>
+        </div>
+      </div>
+
+      <div id="footer_id">
+        <div id="footer_text_id">
+          <a href="https://phantrunglam.netlify.app"
+            >Quản trị viên: Phan Trung Lâm, @Copyright 2025 Phan Ngô Đại tộc</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Tab switching functionality
+      document.querySelectorAll(".submission-tab").forEach((tab) => {
+        tab.addEventListener("click", () => {
+          document
+            .querySelectorAll(".submission-tab")
+            .forEach((t) => t.classList.remove("active"));
+          tab.classList.add("active");
+          // Here you would load the appropriate submissions based on the selected tab
+        });
+      });
+
+      // Action buttons functionality
+      document.querySelectorAll(".action-btn.hide").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          const card = this.closest(".submission-card");
+          // Here you would send a request to update the submission status
+          alert("Đã ẩn đóng góp này");
+        });
+      });
+
+      document.querySelectorAll(".action-btn.delete").forEach((btn) => {
+        btn.addEventListener("click", function () {
+          if (confirm("Bạn có chắc chắn muốn xóa đóng góp này?")) {
+            const card = this.closest(".submission-card");
+            // Here you would send a request to delete the submission
+            card.style.display = "none";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

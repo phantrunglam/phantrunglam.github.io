@@ -1,0 +1,16 @@
+{
+  "submissions": [
+    {
+      "id": "12345",
+      "user_id": "user_001",
+      "name": "Nguyễn Văn A",
+      "email": "user@example.com",
+      "phone": "0123456789",
+      "comment": "Đây là một bình luận.",
+      "media": ["image1.jpg", "image2.png"],
+      "linked_to": "Person_1001",
+      "created_at": "2025-04-01T12:00:00Z",
+      "status": "active"
+    }
+  ]
+}
