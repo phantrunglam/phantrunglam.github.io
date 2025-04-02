@@ -6,6 +6,12 @@
 [functions]
   node_bundler = "esbuild"
 
+
+  # Cách khai báo runtime ĐÚNG:
+[functions.runtime]
+  runtime = "nodejs18"  # Node.js version
+  # external_node_modules = []  # (Tùy chọn) Nếu cần thêm modules
+
 [[redirects]]
   from = "/data/*"
   to = "/data/:splat"
