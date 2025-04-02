@@ -24,7 +24,9 @@ exports.handler = async (event) => {
     };
   }
 
-  const DATA_FILE = path.join(process.cwd(), "data", "submissions.json");
+  //const DATA_FILE = path.join(process.cwd(), "data", "submissions.json");
+  const DATA_FILE = "/data/submissions.json";
+  
   // const lockFile = DATA_FILE + ".lock";
   const lockFile = "/data/submissions.json.lock";
 
