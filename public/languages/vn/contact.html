@@ -257,10 +257,14 @@
     <script>
       $(document).ready(function () {
         let allPersons = [];
+        // Đường dẫn đúng cho cả local và production
+        const jsonPath = window.location.href.includes("/vn/")
+          ? "../../data/person_list.json"
+          : "data/person_list.json";
 
         // 1. Tải dữ liệu
         function loadPersonData() {
-          $.getJSON("data/person_list.json")
+          $.getJSON(jsonPath)
             .done(function (data) {
               allPersons = data;
               initSelect2();
@@ -278,7 +282,7 @@
           $(".js-select2").select2({
             data: allPersons.map((p) => ({
               id: p.person_id,
-              text: `${p.person_name} (${p.person_id})`,
+              text: `${p.person_name} (${p.person_id}) ${p.person_birthday}`,
               person: p,
             })),
             placeholder: "Gõ tên hoặc ID để tìm...",
