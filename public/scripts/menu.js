@@ -22,14 +22,22 @@ document.addEventListener("DOMContentLoaded", function () {
         <li class="menu_item" data-tooltip="Nguồn tài liệu tham khảo">
             <a href="/languages/vn/sourcelist.html">Nguồn tham chiếu</a>
         </li>
-        <li class="menu_item" data-tooltip="Thống kê gia tộc">
+        <li class="menu_item" data-tooltip="Các Thống kê về thành viên gia tộc">
             <a href="/languages/vn/statistics.html">Thống kê</a>
         </li>
         <li class="menu_item" data-tooltip="Liên hệ quản trị viên">
             <a href="/languages/vn/contact.html">Liên hệ</a>
         </li>
+        <li class="menu_item has_submenu" data-tooltip="Trao đổi, góp ý, liên hệ quản trị viên">
+    <a href="#">Liên hệ</a>
+    <ul class="submenu">
+        <li><a href="/languages/vn/contact-google-form.htm">Cập nhật thông tin thành viên</a></li>
+        <li><a href="/languages/vn/feedback.html">Trao đổi góp ý</a></li>
+        <li><a href="/languages/vn/contact.html">Liên hệ quản trị viên</a></li>
+    </ul>
+    </li>
         <li class="menu_item" data-tooltip="Hướng dẫn sử dụng" id="help-trigger">
-            <a href="#">Trợ giúp</a>
+            <a href="#">Hướng dẫn</a>
         </li>
         <li class="menu_item" data-tooltip="Quay lại trang trước">
             <button id="back_button" onclick="window.history.back();">⬅ Back</button>

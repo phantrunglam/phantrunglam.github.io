@@ -669,3 +669,40 @@ td {
 .paging_menu_item:hover {
   background-color: #d1e7fd;
 }
+
+/* Sub Menu */
+.has_submenu {
+  position: relative;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  background-color: white;
+  list-style: none;
+  padding: 5px 0;
+  border: 1px solid #ccc;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  min-width: 200px;
+}
+
+.submenu li {
+  padding: 8px 15px;
+}
+
+.submenu li a {
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+
+.submenu li:hover {
+  background-color: #f0f0f0;
+}
+
+/* Hiện submenu khi hover vào mục cha */
+.has_submenu:hover .submenu {
+  display: block;
+}
