@@ -258,9 +258,7 @@
       $(document).ready(function () {
         let allPersons = [];
         // Đường dẫn đúng cho cả local và production
-        const jsonPath = window.location.href.includes("/vn/")
-          ? "../../data/person_list.json"
-          : "data/person_list.json";
+        const jsonPath = "/scripts/person_list.json";
 
         // 1. Tải dữ liệu
         function loadPersonData() {
