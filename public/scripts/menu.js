@@ -25,13 +25,9 @@ document.addEventListener("DOMContentLoaded", function () {
         <li class="menu_item" data-tooltip="Các Thống kê về thành viên gia tộc">
             <a href="/languages/vn/statistics.html">Thống kê</a>
         </li>
-        <li class="menu_item" data-tooltip="Liên hệ quản trị viên">
-            <a href="/languages/vn/contact.html">Liên hệ</a>
-        </li>
-        <li class="menu_item has_submenu" data-tooltip="Trao đổi, góp ý, liên hệ quản trị viên">
-    <a href="#">Liên hệ</a>
+        <li class="menu_item has_submenu"> <a href="#">Liên hệ</a>
     <ul class="submenu">
-        <li><a href="/languages/vn/contact-google-form.htm">Cập nhật thông tin thành viên</a></li>
+        <li><a href="/languages/vn/contact-google-form.html">Cập nhật thông tin thành viên</a></li>
         <li><a href="/languages/vn/feedback.html">Trao đổi góp ý</a></li>
         <li><a href="/languages/vn/contact.html">Liên hệ quản trị viên</a></li>
     </ul>
