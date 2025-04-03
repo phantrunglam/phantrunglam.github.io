@@ -2,210 +2,70 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>Phan Ngô gia phả - Liên hệ</title>
-    <link href="/css/default.css" rel="stylesheet" type="text/css" />
-    <link href="/favicon.ico" rel="icon" type="image/x-icon" />
-    <script src="/scripts/back_button.js"></script>
-    <script src="/scripts/menu.js"></script>
-    <script src="/scripts/search_person.js"></script>
+    <title>Demo Select2</title>
+    <!-- Thêm thư viện -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <style>
-      .contact-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 2rem;
-        margin-top: 2rem;
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
       }
-      .contact-info,
-      .submission-form {
-        flex: 1;
-        min-width: 300px;
+      .form-container {
+        max-width: 600px;
+        margin: 0 auto;
       }
-      #submitForm {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 1rem;
-        margin-top: 1rem;
-      }
-      #submitForm label {
-        font-weight: bold;
-        margin-bottom: 0.5rem;
-      }
-      #submitForm input,
-      #submitForm textarea,
-      #submitForm select {
-        width: 100%;
-        padding: 0.5rem;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-      }
-      #submitForm textarea {
-        min-height: 120px;
-      }
-      #submitForm button {
-        background-color: #4caf50;
-        color: white;
-        padding: 0.75rem 1.5rem;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 1rem;
-        margin-top: 1rem;
-      }
-      #submitForm button:hover {
-        background-color: #45a049;
-      }
-      .page_subsection {
-        margin-bottom: 2rem;
-        background: #f9f9f9;
-        padding: 1.5rem;
-        border-radius: 8px;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      .select2-container {
+        width: 100% !important;
+        margin: 10px 0;
       }
     </style>
   </head>
-  <body class="contact_page">
-    <div id="view_id">
-      <div id="header_id">
-        <div id="header_inner_id">
-          <div id="header_emblem_left_id">
-            <img alt="" src="/resources/emblem.png" />
-          </div>
-          <div id="header_text_id">
-            <h1>Phan Ngô gia phả</h1>
-          </div>
-        </div>
-      </div>
-      <div id="menu_id"></div>
-      <div id="content_id">
-        <div class="main_heading">
-          <h1>Liên hệ</h1>
-        </div>
-
-        <div class="contact-container">
-          <div class="contact-info">
-            <div class="page_subsection">
-              <h2>Liên hệ Tác giả</h2>
-              <table>
-                <tbody>
-                  <tr>
-                    <td>Tên:</td>
-                    <td>Phan Trung Lâm</td>
-                  </tr>
-                  <tr>
-                    <td>Địa chỉ:</td>
-                    <td>Lake 2, Ecopark</td>
-                  </tr>
-                  <tr>
-                    <td>Thành phố:</td>
-                    <td>Bình Yên</td>
-                  </tr>
-                  <tr>
-                    <td>Email:</td>
-                    <td>
-                      <a href="mailto:phantrunglam@gmail.com"
-                        >phantrunglam@gmail.com</a
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Điện thoại:</td>
-                    <td>+84 0989428555</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <div class="page_subsection">
-              <h2>Ban đại diện Gia tộc</h2>
-              <table>
-                <tbody>
-                  <tr>
-                    <td>Gia tộc:</td>
-                    <td>Họ Phan Ngô Tống Văn</td>
-                  </tr>
-                  <tr>
-                    <td>Website:</td>
-                    <td>
-                      <a href="https://phantrunglam.netlify.app" target="_blank"
-                        >https://phantrunglam.netlify.app</a
-                      >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>Phiên bản:</td>
-                    <td>Phát hành 1.1</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="submission-form">
-            <div class="page_subsection">
-              <h2>Góp ý / Cập nhật</h2>
-              <p>
-                Quý thành viên có thể gửi thông tin, hình ảnh hoặc góp ý để cập
-                nhật vào gia phả.
-              </p>
-
-              <form
-                name="submitForm"
-                method="POST"
-                netlify
-                enctype="multipart/form-data"
-                data-netlify-recaptcha="true"
-              >
-                <h2>Gửi ảnh và góp ý cho gia phả</h2>
-
-                <!-- Trường thông tin cơ bản -->
-                <label for="name">Họ Tên (*):</label>
-                <input type="text" id="name" name="name" required />
-
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email" required />
-
-                <label for="phone">Số điện thoại:</label>
-                <input type="text" id="phone" name="phone" />
-
-                <label for="comment">Nội dung góp ý (*):</label>
-                <textarea id="comment" name="comment" required></textarea>
-
-                <!-- Upload ảnh -->
-
-                <label for="media">Hình ảnh (nếu có)</label>
-                <input
-                  type="file"
-                  id="media"
-                  name="media"
-                  multiple
-                  accept="image/*,.pdf"
-                />
-                <label for="linked_to">Đối tượng liên kết:</label>
-                <select id="linked_to" name="linked_to">
-                  <optionop value="none">Chọn nhân vật/sự kiện</option>
-                  <!-- Tạo danh sách đối tượng từ database hoặc API -->
-                </select>
-                <!-- reCAPTCHA chống spam -->
-                <div data-netlify-recaptcha="true"></div>
-
-                <button type="submit">Gửi thông tin</button>
-              </form>
-
-              
-            </div>
-          </div>
-        </div>
-      </div>
-      <script src="/scripts/submit-form.js"></script>
-
-      <div id="footer_id">
-        <div id="footer_text_id">
-          <a href="https://phantrunglam.netlify.app"
-            >Quản trị viên: Phan Trung Lâm, @Copyright 2025 Phan Ngô Đại tộc</a
-          >
-        </div>
-      </div>
+  <body>
+    <div class="form-container">
+      <h2>Góp ý gia phả (Demo Select2)</h2>
+      <form>
+        <label>Chọn nhân vật liên kết:</label>
+        <select id="linked_to" class="js-select2">
+          <option value="none">Chọn nhân vật/sự kiện</option>
+        </select>
+      </form>
     </div>
+
+    <script>
+      $(document).ready(function () {
+        // 1. Khởi tạo Select2
+        $(".js-select2").select2({
+          placeholder: "Tìm kiếm nhân vật...",
+          allowClear: true,
+        });
+
+        // 2. Dữ liệu mẫu (thay thế = $.getJSON trong thực tế)
+        const persons = [
+          { id: "p001", name: "Phan Văn A", birthYear: 1950 },
+          { id: "p002", name: "Ngô Thị B", birthYear: 1960 },
+          { id: "p003", name: "Phan Trung C", birthYear: 1970 },
+        ];
+
+        // 3. Thêm option vào dropdown
+        persons.forEach((person) => {
+          $("#linked_to").append(
+            new Option(
+              `${person.name} (${person.birthYear})`,
+              person.id,
+              false,
+              false
+            )
+          );
+        });
+
+        // 4. Làm mới Select2 sau khi thêm dữ liệu
+        $("#linked_to").trigger("change");
+      });
+    </script>
   </body>
 </html>
