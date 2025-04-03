@@ -149,14 +149,8 @@
                 nhật vào gia phả.
               </p>
 
-              <form
-                id="submitForm"
-                method="POST"
-                netlify
-                enctype="multipart/form-data"
-                data-netlify-recaptcha="true"
-              >
-                <label for="name">Họ Tên (*):</label>
+              <form id="submitForm">
+                <label for="name">Tên:</label>
                 <input type="text" id="name" name="name" required />
 
                 <label for="email">Email:</label>
@@ -165,7 +159,7 @@
                 <label for="phone">Số điện thoại:</label>
                 <input type="text" id="phone" name="phone" />
 
-                <label for="comment">Nội dung góp ý:</label>
+                <label for="comment">Nội dung:</label>
                 <textarea id="comment" name="comment" required></textarea>
 
                 <label for="media">Hình ảnh (nếu có):</label>
@@ -174,7 +168,7 @@
                   id="media"
                   name="media"
                   multiple
-                  accept="image/*, .pdf"
+                  accept="image/*"
                 />
 
                 <label for="linked_to">Đối tượng liên kết:</label>
@@ -182,9 +176,6 @@
                   <option value="none">Chọn nhân vật/sự kiện</option>
                   <!-- Tạo danh sách đối tượng từ database hoặc API -->
                 </select>
-
-                <!-- reCAPTCHA chống spam -->
-                <div data-netlify-recaptcha="true"></div>
 
                 <button type="submit">Gửi thông tin</button>
               </form>

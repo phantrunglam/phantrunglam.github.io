@@ -150,12 +150,15 @@
               </p>
 
               <form
-                id="submitForm"
+                name="submitForm"
                 method="POST"
                 netlify
                 enctype="multipart/form-data"
                 data-netlify-recaptcha="true"
               >
+                <h2>Gửi ảnh và góp ý cho gia phả</h2>
+
+                <!-- Trường thông tin cơ bản -->
                 <label for="name">Họ Tên (*):</label>
                 <input type="text" id="name" name="name" required />
 
@@ -165,29 +168,31 @@
                 <label for="phone">Số điện thoại:</label>
                 <input type="text" id="phone" name="phone" />
 
-                <label for="comment">Nội dung góp ý:</label>
+                <label for="comment">Nội dung góp ý (*):</label>
                 <textarea id="comment" name="comment" required></textarea>
 
-                <label for="media">Hình ảnh (nếu có):</label>
+                <!-- Upload ảnh -->
+
+                <label for="media">Hình ảnh (nếu có)</label>
                 <input
                   type="file"
                   id="media"
                   name="media"
                   multiple
-                  accept="image/*, .pdf"
+                  accept="image/*,.pdf"
                 />
-
                 <label for="linked_to">Đối tượng liên kết:</label>
                 <select id="linked_to" name="linked_to">
-                  <option value="none">Chọn nhân vật/sự kiện</option>
+                  <optionop value="none">Chọn nhân vật/sự kiện</option>
                   <!-- Tạo danh sách đối tượng từ database hoặc API -->
                 </select>
-
                 <!-- reCAPTCHA chống spam -->
                 <div data-netlify-recaptcha="true"></div>
 
                 <button type="submit">Gửi thông tin</button>
               </form>
+
+              
             </div>
           </div>
         </div>
