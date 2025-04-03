@@ -260,7 +260,7 @@
 
         // 1. Tải dữ liệu
         function loadPersonData() {
-          $.getJSON("/data/person_list.json")
+          $.getJSON("data/person_list.json")
             .done(function (data) {
               allPersons = data;
               initSelect2();
