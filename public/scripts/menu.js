@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
         <li class="menu_item active_menu_item" data-tooltip="Trang chủ gia phả">
             <a href="/languages/vn/index.html">Trang chủ</a>
         </li>
-        <li class="menu_item search_item" data-tooltip="Tìm kiếm nhân vật">
+        <li class="menu_item search_item" >
             <input type="text" id="search_input" placeholder="Tìm kiếm Nhân vật...">
             <div class="search-dropdown"></div>
         </li>

@@ -257,46 +257,73 @@
     <script>
       $(document).ready(function () {
         let allPersons = [];
+        // Đường dẫn đúng cho cả local và production
+        const jsonPath = "/scripts/person_list.json";
 
         // 1. Tải dữ liệu
         function loadPersonData() {
-          $.getJSON("../../data/person_list.json")
+          $.getJSON(jsonPath)
             .done(function (data) {
               allPersons = data;
               initSelect2();
-              initMemberSearch(); // Khởi tạo tìm kiếm người gửi
+              initMemberSearch();
             })
-            .fail(handleLoadError);
+            .fail(function () {
+              alert(
+                "Không tải được danh sách thành viên. Vui lòng tải lại trang."
+              );
+            });
         }
 
         // 2. Select2 cho người liên kết
         function initSelect2() {
           $(".js-select2").select2({
-            data: allPersons.map(formatPersonOption),
-            placeholder: "Gõ tên, ID hoặc năm sinh...",
+            data: allPersons.map((p) => ({
+              id: p.person_id,
+              text: `${p.person_name} (${p.person_id}) ${p.person_birthday}`,
+              person: p,
+            })),
+            placeholder: "Gõ tên hoặc ID để tìm...",
             width: "100%",
             minimumInputLength: 1,
-            templateResult: formatPersonDisplay,
-            templateSelection: formatPersonDisplay,
           });
         }
 
-        // 3. Tìm kiếm người gửi (giống Select2)
+        // 3. Xử lý tìm kiếm thành viên
         function initMemberSearch() {
-          $("#member_search")
-            .select2({
-              data: allPersons.map(formatPersonOption),
-              placeholder: "Tìm thành viên...",
-              width: "100%",
-              minimumInputLength: 1,
-              templateResult: formatPersonDisplay,
-              templateSelection: formatPersonDisplay,
-              dropdownParent: $("#member_info"), // Đảm bảo dropdown hiển thị đúng vị trí
+          $("#is_member")
+            .change(function () {
+              const isMember = $(this).val() === "1";
+              $("#member_info").toggle(isMember);
+              $("#manual_info").toggle(!isMember);
             })
-            .on("select2:select", function (e) {
-              const person = e.params.data.person;
-              showMemberDetails(person);
-            });
+            .trigger("change");
+
+          $("#member_search")
+            .autocomplete({
+              source: function (request, response) {
+                const term = request.term.toLowerCase();
+                const results = allPersons
+                  .filter(
+                    (p) =>
+                      p.person_name.toLowerCase().includes(term) ||
+                      p.person_id.toLowerCase().includes(term)
+                  )
+                  .slice(0, 10);
+                response(results);
+              },
+              select: function (event, ui) {
+                showMemberDetails(ui.item);
+                return false;
+              },
+            })
+            .autocomplete("instance")._renderItem = function (ul, item) {
+            return $("<li>")
+              .append(
+                `<div><strong>${item.person_name}</strong> <small>${item.person_id}</small></div>`
+              )
+              .appendTo(ul);
+          };
         }
 
         // 4. Hiển thị thông tin thành viên
@@ -304,17 +331,15 @@
           $("#member_details")
             .html(
               `
-            <div class="person-card">
-              <h4>${person.person_name}</h4>
-              <p><strong>ID:</strong> ${person.person_id}</p>
-              ${
-                person.person_birthday
-                  ? `<p><strong>Sinh năm:</strong> ${person.person_birthday}</p>`
-                  : ""
-              }
-              <button type="button" class="confirm-btn">Xác nhận chọn</button>
-            </div>
-          `
+        <h4>${person.person_name}</h4>
+        <p><strong>ID:</strong> ${person.person_id}</p>
+        ${
+          person.person_birthday
+            ? `<p><strong>Sinh năm:</strong> ${person.person_birthday}</p>`
+            : ""
+        }
+        <button type="button" class="confirm-btn">Xác nhận chọn</button>
+      `
             )
             .show();
 
@@ -324,83 +349,9 @@
           });
         }
 
-        // Các hàm hỗ trợ
-        function formatPersonOption(person) {
-          return {
-            id: person.person_id,
-            text: formatPersonText(person),
-            person: person,
-          };
-        }
-
-        function formatPersonText(person) {
-          let text = `${person.person_name} (ID: ${person.person_id})`;
-          if (person.person_birthday?.trim()) {
-            text += ` - ${person.person_birthday}`;
-          }
-          return text;
-        }
-
-        function formatPersonDisplay(item) {
-          if (!item.id) return item.text;
-          const p = item.person || item;
-          return $(`
-            <div class="person-option">
-              <span class="person-name">${p.person_name}</span>
-              <span class="person-id">ID: ${p.person_id}</span>
-              ${
-                p.person_birthday
-                  ? `<span class="person-birth">${p.person_birthday}</span>`
-                  : ""
-              }
-            </div>
-          `);
-        }
-
-        function handleLoadError() {
-          console.error("Lỗi tải danh sách");
-          alert(
-            "Tạm thời không tải được danh sách thành viên. Vui lòng thử lại sau."
-          );
-        }
-
         // Khởi chạy
         loadPersonData();
       });
     </script>
-
-    <style>
-      /* Thêm CSS mới */
-      .person-card {
-        padding: 15px;
-        background: #f0f8ff;
-        border-radius: 5px;
-        margin-top: 10px;
-      }
-
-      .select2-results__options {
-        max-height: 300px;
-        overflow-y: auto !important;
-      }
-
-      .person-option {
-        padding: 8px;
-        border-bottom: 1px solid #eee;
-      }
-      .person-option:hover {
-        background: #f5f5f5;
-      }
-      .person-name {
-        font-weight: bold;
-        display: block;
-      }
-      .person-id,
-      .person-birth {
-        font-size: 0.9em;
-        color: #666;
-        display: inline-block;
-        margin-right: 10px;
-      }
-    </style>
   </body>
 </html>
