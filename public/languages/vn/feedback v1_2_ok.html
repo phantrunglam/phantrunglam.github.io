@@ -145,9 +145,18 @@
           class="fullscreen-form"
           method="POST"
           netlify
+          name="feedback-form"
+          netlify-honeypot="bot-field"
           enctype="multipart/form-data"
-          data-netlify-recaptcha="true"
         >
+          <!-- Thêm trường honeypot để chống spam -->
+          <input type="hidden" name="form-name" value="feedback-form" />
+          <p style="display: none">
+            <label
+              >Không điền vào đây nếu bạn là người: <input name="bot-field"
+            /></label>
+          </p>
+
           <!-- PHẦN NGƯỜI GỬI - LAYOUT NGANG -->
           <div class="sender-section">
             <div class="member-info">

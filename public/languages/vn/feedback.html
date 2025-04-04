@@ -145,9 +145,18 @@
           class="fullscreen-form"
           method="POST"
           netlify
+          name="feedback-form"
+          netlify-honeypot="bot-field"
           enctype="multipart/form-data"
-          data-netlify-recaptcha="true"
         >
+          <!-- Thêm trường honeypot để chống spam -->
+          <input type="hidden" name="form-name" value="feedback-form" />
+          <p style="display: none">
+            <label
+              >Không điền vào đây nếu bạn là người: <input name="bot-field"
+            /></label>
+          </p>
+
           <!-- PHẦN NGƯỜI GỬI - LAYOUT NGANG -->
           <div class="sender-section">
             <div class="member-info">
@@ -169,6 +178,7 @@
                 <input
                   type="text"
                   id="member_search"
+                  name="member_search_term"
                   placeholder="Nhập tên hoặc ID..."
                   style="padding: 8px"
                 />
@@ -226,7 +236,7 @@
             </div>
 
             <div class="file-upload">
-              <label>Tải lên tài liệu/hình ảnh (nếu có):</label>
+              <label>Tải lên hình ảnh hoặc tài liệu pdf (nếu có):</label>
               <input
                 type="file"
                 id="media"
@@ -239,6 +249,22 @@
 
           <button type="submit" class="submit-btn">Gửi thông tin</button>
         </form>
+
+        <script>
+          // Thêm đoạn này để đảm bảo form hoạt động với Netlify
+          document.addEventListener("DOMContentLoaded", function () {
+            // Xử lý submit form để tránh xung đột
+            document
+              .getElementById("submitForm")
+              ?.addEventListener("submit", function (e) {
+                // Đảm bảo các giá trị được cập nhật trước khi submit
+                const form = this;
+                setTimeout(function () {
+                  form.submit();
+                }, 100);
+              });
+          });
+        </script>
       </div>
 
       <div id="footer_id">
