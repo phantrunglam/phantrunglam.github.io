@@ -172,71 +172,89 @@
 
     <script>
       $(document).ready(function () {
-        // Hàm định dạng hiển thị
+        let allPersons = [];
+        const jsonPath = "/scripts/person_list.json"; // Đường dẫn đến file JSON
+
+        // 1. Tải dữ liệu từ file JSON
+        function loadPersonData() {
+          $.getJSON(jsonPath)
+            .done(function (data) {
+              allPersons = data;
+              initSearchFields();
+            })
+            .fail(function () {
+              alert(
+                "Không tải được danh sách thành viên. Vui lòng tải lại trang."
+              );
+            });
+        }
+
+        // 2. Định dạng hiển thị
         function formatPerson(person) {
           if (!person.id) return person.text;
 
-          let displayText = `<div class="person-option">
-                              <span class="person-name">${
-                                person.person_name || person.text
-                              }</span>`;
-
+          let displayText = person.person_name || person.text;
           if (person.person_birthday) {
-            displayText += `<span class="person-details"> • ${person.person_birthday}</span>`;
+            displayText += ` • ${person.person_birthday}`;
           }
           if (person.person_id) {
-            displayText += `<span class="person-details"> • ID: ${person.person_id}</span>`;
+            displayText += ` • ID: ${person.person_id}`;
           }
-
-          return displayText + "</div>";
+          return displayText;
         }
 
-        // Cấu hình chung cho Select2
-        const select2Config = {
-          placeholder: "Nhập ít nhất 1 ký tự...",
-          minimumInputLength: 1,
-          width: "100%",
-          ajax: {
-            url: "/api/search_member",
-            dataType: "json",
-            delay: 250,
-            data: function (params) {
-              return { q: params.term };
-            },
-            processResults: function (data) {
-              return {
-                results: data.items.map((item) => ({
-                  id: item.person_id,
-                  text: item.person_name,
-                  person_name: item.person_name,
-                  person_birthday: item.person_birthday,
-                  person_id: item.person_id,
-                })),
-              };
-            },
-          },
-          templateResult: formatPerson,
-          templateSelection: formatPerson,
-          escapeMarkup: function (m) {
-            return m;
-          },
-        };
+        // 3. Khởi tạo các ô tìm kiếm
+        function initSearchFields() {
+          // Cấu hình chung cho Select2
+          const select2Config = {
+            data: allPersons.map((person) => ({
+              id: person.person_id,
+              text: person.person_name,
+              person_name: person.person_name,
+              person_birthday: person.person_birthday,
+              person_id: person.person_id,
+            })),
+            placeholder: "Nhập tên, năm sinh hoặc ID...",
+            minimumInputLength: 1,
+            width: "100%",
+            matcher: function (params, data) {
+              // Cho phép tìm kiếm theo tên, năm sinh hoặc ID
+              const term = params.term.toLowerCase();
+              const nameMatch =
+                data.person_name?.toLowerCase().includes(term) || false;
+              const birthMatch = data.person_birthday?.includes(term) || false;
+              const idMatch =
+                data.person_id?.toLowerCase().includes(term) || false;
 
-        // Khởi tạo ô tìm kiếm người gửi
-        $("#member_search")
-          .select2(select2Config)
-          .on("select2:select", function (e) {
-            const person = e.params.data;
-            $("#name").val(person.person_name);
-            $("#member_id").val(person.id);
-          });
+              return nameMatch || birthMatch || idMatch;
+            },
+            templateResult: function (data) {
+              return formatPerson(data);
+            },
+            templateSelection: function (data) {
+              return formatPerson(data);
+            },
+          };
 
-        // Khởi tạo ô tìm kiếm người liên kết
-        $("#linked_to_search")
-          .select2(select2Config)
-          .on("select2:select", function (e) {
-            $("#linked_to").val(e.params.data.id);
-          });
+          // Ô tìm kiếm người gửi
+          $("#member_search")
+            .select2(select2Config)
+            .on("select2:select", function (e) {
+              const person = e.params.data;
+              $("#name").val(person.person_name);
+              $("#member_id").val(person.id);
+            });
+
+          // Ô tìm kiếm người liên kết
+          $("#linked_to_search")
+            .select2(select2Config)
+            .on("select2:select", function (e) {
+              $("#linked_to").val(e.params.data.id);
+            });
+        }
+
+        // Khởi chạy
+        loadPersonData();
       });
     </script>
   </body>
