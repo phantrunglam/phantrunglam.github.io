@@ -8,7 +8,6 @@
     <link href="/favicon.ico" rel="icon" type="image/x-icon" />
     <script src="/scripts/back_button.js"></script>
     <script src="/scripts/menu.js"></script>
-    <script src="/scripts/search_person.js"></script>
 
     <!-- Thư viện -->
     <link
@@ -21,7 +20,6 @@
     />
 
     <style>
-      /* Reset và layout tổng thể */
       body.contact_page {
         margin: 0;
         padding: 0;
@@ -34,7 +32,6 @@
         box-sizing: border-box;
       }
 
-      /* Form container */
       .fullscreen-form {
         display: grid;
         grid-template-columns: 1fr;
@@ -47,53 +44,25 @@
         box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
       }
 
-      /* Phần người gửi - layout ngang */
       .sender-section {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 20px;
-        padding: 20px;
-        background: #f9f9f9;
-        border-radius: 8px;
       }
 
-      /* Phần tìm kiếm thành viên */
-      .member-search-area {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      /* Phần nhập liên kết + comment */
-      .content-section {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      /* Select2 custom */
       .select2-container {
         width: 100% !important;
         margin: 5px 0 15px !important;
       }
 
-      /* Comment area */
-      .comment-area textarea {
-        min-height: 200px;
+      input[type="text"],
+      input[type="email"] {
         width: 100%;
-        padding: 15px;
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        font-size: 16px;
-        resize: vertical;
+        padding: 8px;
+        margin: 5px 0 15px;
+        box-sizing: border-box;
       }
 
-      /* File upload */
-      .file-upload {
-        margin: 15px 0;
-      }
-
-      /* Nút submit */
       .submit-btn {
         background: #4caf50;
         color: white;
@@ -106,20 +75,19 @@
         justify-self: end;
       }
 
-      .submit-btn:hover {
-        background: #3e8e41;
+      /* Hiển thị kết quả tìm kiếm */
+      .person-option {
+        padding: 8px;
+      }
+      .person-name {
+        font-weight: bold;
+        display: block;
+      }
+      .person-details {
+        font-size: 0.9em;
+        color: #666;
       }
 
-      /* Member card */
-      .member-card {
-        padding: 15px;
-        background: #e8f5e9;
-        border-radius: 5px;
-        margin-top: 10px;
-        display: none;
-      }
-
-      /* Responsive */
       @media (max-width: 768px) {
         .sender-section {
           grid-template-columns: 1fr;
@@ -129,10 +97,7 @@
   </head>
   <body class="contact_page">
     <div id="view_id">
-      <div id="header_id">
-        <!-- Giữ nguyên header -->
-      </div>
-
+      <div id="header_id"></div>
       <div id="menu_id"></div>
 
       <div id="content_id">
@@ -147,68 +112,36 @@
           netlify
           enctype="multipart/form-data"
         >
-          <!-- PHẦN NGƯỜI GỬI - LAYOUT NGANG -->
+          <!-- PHẦN NGƯỜI GỬI -->
           <div class="sender-section">
             <div class="member-info">
               <h3>Thông tin người gửi</h3>
 
-              <label hidden>
-                Bạn là thành viên gia phả?
-                <select
-                  id="is_member"
-                  style="width: 100%; padding: 8px; margin: 5px 0 15px"
-                >
-                  <option value="0">Không, tôi là khách</option>
-                  <option value="1">Có, tôi là thành viên</option>
-                </select>
-              </label>
+              <label>Tìm kiếm thành viên:</label>
+              <input
+                type="text"
+                id="member_search"
+                placeholder="Nhập tên, năm sinh hoặc ID..."
+              />
+              <input type="hidden" id="member_id" name="member_id" />
 
-              <div id="member_info" class="member-search-area">
-                <label>Tìm kiếm thành viên:</label>
-                <input
-                  type="text"
-                  id="member_search"
-                  placeholder="Nhập tên cần tìm, chọn theo tên và ngày sinh nếu có..."
-                  style="padding: 8px"
-                />
-                <input type="hidden" id="member_id" name="member_id" />
-                <div id="member_details" class="member-card"></div>
-              </div>
+              <label>Họ Tên (*):</label>
+              <input type="text" id="name" name="name" required />
 
-              <div id="manual_info">
-                <label>Họ Tên (*):</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  style="width: 100%; padding: 8px"
-                />
-
-                <label>Email:</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  style="width: 100%; padding: 8px"
-                />
-
-                <label>Số điện thoại:</label>
-                <input
-                  type="text"
-                  id="phone"
-                  name="phone"
-                  style="width: 100%; padding: 8px"
-                />
-              </div>
+              <label>Email:</label>
+              <input type="email" id="email" name="email" />
             </div>
 
+            <!-- PHẦN LIÊN KẾT NHÂN VẬT -->
             <div class="linked-person">
               <h3>Liên kết với nhân vật</h3>
-              <p>Chọn nhân vật bạn muốn cập nhật thông tin:</p>
-              <select id="linked_to" name="linked_to" class="js-select2">
-                <option value="none">Chọn nhân vật...</option>
-              </select>
+              <p>Nhập tên nhân vật cần cập nhật:</p>
+              <input
+                type="text"
+                id="linked_to_search"
+                placeholder="Tìm theo tên, năm sinh hoặc ID..."
+              />
+              <input type="hidden" id="linked_to" name="linked_to" />
             </div>
           </div>
 
@@ -221,208 +154,90 @@
                 name="comment"
                 placeholder="Mô tả chi tiết thông tin bạn muốn cập nhật..."
                 required
+                style="width: 100%; min-height: 200px; padding: 15px"
               ></textarea>
             </div>
 
-            <div class="file-upload">
-              <label>Tải lên tài liệu/hình ảnh (nếu có):</label>
-              <input
-                type="file"
-                id="media"
-                name="media"
-                multiple
-                accept="image/*, .pdf"
-              />
-            </div>
+            <button type="submit" class="submit-btn">Gửi thông tin</button>
           </div>
-
-          <button type="submit" class="submit-btn">Gửi thông tin</button>
         </form>
       </div>
 
-      <div id="footer_id">
-        <!-- Giữ nguyên footer -->
-      </div>
+      <div id="footer_id"></div>
     </div>
 
     <!-- Script -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <script>
       $(document).ready(function () {
-        let allPersons = [];
+        // Hàm định dạng hiển thị
+        function formatPerson(person) {
+          if (!person.id) return person.text;
 
-        // 1. Tải dữ liệu
-        function loadPersonData() {
-          $.getJSON("../../data/person_list.json")
-            .done(function (data) {
-              allPersons = data;
-              initSelect2();
-              initMemberSearch(); // Khởi tạo tìm kiếm người gửi
-            })
-            .fail(handleLoadError);
-        }
+          let displayText = `<div class="person-option">
+                              <span class="person-name">${
+                                person.person_name || person.text
+                              }</span>`;
 
-        // 2. Select2 cho người liên kết
-        function initSelect2() {
-          // Cấu hình chung cho cả hai select box
-          const select2Config = {
-            data: allPersons.map(formatPersonOption),
-            placeholder: "Gõ tên, ID hoặc năm sinh...",
-            width: "100%",
-            minimumInputLength: 1,
-            templateResult: formatPersonDisplay,
-            templateSelection: formatPersonDisplay,
-            escapeMarkup: function (m) {
-              return m;
-            }, // Cho phép HTML trong kết quả
-          };
-
-          // Áp dụng cho select box người gửi
-          $("#member_search")
-            .select2({
-              ...select2Config,
-              dropdownParent: $("#member_info"),
-            })
-            .on("select2:select", function (e) {
-              const person = e.params.data.person;
-              showMemberDetails(person);
-            });
-
-          // Áp dụng cho select box người liên kết
-          $("#linked_to")
-            .select2({
-              ...select2Config,
-              dropdownParent: $(".linked-person"),
-            })
-            .on("select2:select", function (e) {
-              // Xử lý khi chọn người liên kết nếu cần
-              console.log("Đã chọn người liên kết:", e.params.data);
-            });
-        }
-
-        // 3. Tìm kiếm người gửi (giống Select2)
-        function initMemberSearch() {
-          $("#member_search")
-            .select2({
-              data: allPersons.map(formatPersonOption),
-              placeholder: "Tìm thành viên...",
-              width: "100%",
-              minimumInputLength: 1,
-              templateResult: formatPersonDisplay,
-              templateSelection: formatPersonDisplay,
-              dropdownParent: $("#member_info"), // Đảm bảo dropdown hiển thị đúng vị trí
-            })
-            .on("select2:select", function (e) {
-              const person = e.params.data.person;
-              showMemberDetails(person);
-            });
-        }
-
-        // 4. Hiển thị thông tin thành viên
-        function showMemberDetails(person) {
-          $("#member_details")
-            .html(
-              `
-            <div class="person-card">
-              <h4>${person.person_name}</h4>
-              <p><strong>ID:</strong> ${person.person_id}</p>
-              ${
-                person.person_birthday
-                  ? `<p><strong>Sinh năm:</strong> ${person.person_birthday}</p>`
-                  : ""
-              }
-              <button type="button" class="confirm-btn">Xác nhận chọn</button>
-            </div>
-          `
-            )
-            .show();
-
-          $(".confirm-btn").click(function () {
-            $("#name").val(person.person_name);
-            $("#member_id").val(person.person_id);
-          });
-        }
-
-        // Các hàm hỗ trợ
-        function formatPersonOption(person) {
-          return {
-            id: person.person_id,
-            text: formatPersonText(person),
-            person: person,
-          };
-        }
-
-        function formatPersonText(person) {
-          let text = `${person.person_name} (ID: ${person.person_id})`;
-          if (person.person_birthday?.trim()) {
-            text += ` - ${person.person_birthday}`;
+          if (person.person_birthday) {
+            displayText += `<span class="person-details"> • ${person.person_birthday}</span>`;
           }
-          return text;
+          if (person.person_id) {
+            displayText += `<span class="person-details"> • ID: ${person.person_id}</span>`;
+          }
+
+          return displayText + "</div>";
         }
 
-        function formatPersonDisplay(item) {
-          if (!item.id) return item.text;
-          const p = item.person || item;
-          return $(`
-            <div class="person-option">
-              <span class="person-name">${p.person_name}</span>
-              <span class="person-id">ID: ${p.person_id}</span>
-              ${
-                p.person_birthday
-                  ? `<span class="person-birth">${p.person_birthday}</span>`
-                  : ""
-              }
-            </div>
-          `);
-        }
+        // Cấu hình chung cho Select2
+        const select2Config = {
+          placeholder: "Nhập ít nhất 1 ký tự...",
+          minimumInputLength: 1,
+          width: "100%",
+          ajax: {
+            url: "/api/search_member",
+            dataType: "json",
+            delay: 250,
+            data: function (params) {
+              return { q: params.term };
+            },
+            processResults: function (data) {
+              return {
+                results: data.items.map((item) => ({
+                  id: item.person_id,
+                  text: item.person_name,
+                  person_name: item.person_name,
+                  person_birthday: item.person_birthday,
+                  person_id: item.person_id,
+                })),
+              };
+            },
+          },
+          templateResult: formatPerson,
+          templateSelection: formatPerson,
+          escapeMarkup: function (m) {
+            return m;
+          },
+        };
 
-        function handleLoadError() {
-          console.error("Lỗi tải danh sách");
-          alert(
-            "Tạm thời không tải được danh sách thành viên. Vui lòng thử lại sau."
-          );
-        }
+        // Khởi tạo ô tìm kiếm người gửi
+        $("#member_search")
+          .select2(select2Config)
+          .on("select2:select", function (e) {
+            const person = e.params.data;
+            $("#name").val(person.person_name);
+            $("#member_id").val(person.id);
+          });
 
-        // Khởi chạy
-        loadPersonData();
+        // Khởi tạo ô tìm kiếm người liên kết
+        $("#linked_to_search")
+          .select2(select2Config)
+          .on("select2:select", function (e) {
+            $("#linked_to").val(e.params.data.id);
+          });
       });
     </script>
-
-    <style>
-      /* Thêm CSS mới */
-      .person-card {
-        padding: 15px;
-        background: #f0f8ff;
-        border-radius: 5px;
-        margin-top: 10px;
-      }
-
-      .select2-results__options {
-        max-height: 300px;
-        overflow-y: auto !important;
-      }
-
-      .person-option {
-        padding: 8px;
-        border-bottom: 1px solid #eee;
-      }
-      .person-option:hover {
-        background: #f5f5f5;
-      }
-      .person-name {
-        font-weight: bold;
-        display: block;
-      }
-      .person-id,
-      .person-birth {
-        font-size: 0.9em;
-        color: #666;
-        display: inline-block;
-        margin-right: 10px;
-      }
-    </style>
   </body>
 </html>
