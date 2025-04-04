@@ -146,14 +146,13 @@
           method="POST"
           netlify
           enctype="multipart/form-data"
-          data-netlify-recaptcha="true"
         >
           <!-- PHẦN NGƯỜI GỬI - LAYOUT NGANG -->
           <div class="sender-section">
             <div class="member-info">
               <h3>Thông tin người gửi</h3>
 
-              <label>
+              <label hidden>
                 Bạn là thành viên gia phả?
                 <select
                   id="is_member"
@@ -169,7 +168,7 @@
                 <input
                   type="text"
                   id="member_search"
-                  placeholder="Nhập tên hoặc ID..."
+                  placeholder="Nhập tên cần tìm, chọn theo tên và ngày sinh nếu có..."
                   style="padding: 8px"
                 />
                 <input type="hidden" id="member_id" name="member_id" />
@@ -237,9 +236,6 @@
             </div>
           </div>
 
-          <!-- reCAPTCHA -->
-          <div data-netlify-recaptcha="true" style="margin: 20px 0"></div>
-
           <button type="submit" class="submit-btn">Gửi thông tin</button>
         </form>
       </div>
@@ -271,14 +267,40 @@
 
         // 2. Select2 cho người liên kết
         function initSelect2() {
-          $(".js-select2").select2({
+          // Cấu hình chung cho cả hai select box
+          const select2Config = {
             data: allPersons.map(formatPersonOption),
             placeholder: "Gõ tên, ID hoặc năm sinh...",
             width: "100%",
             minimumInputLength: 1,
             templateResult: formatPersonDisplay,
             templateSelection: formatPersonDisplay,
-          });
+            escapeMarkup: function (m) {
+              return m;
+            }, // Cho phép HTML trong kết quả
+          };
+
+          // Áp dụng cho select box người gửi
+          $("#member_search")
+            .select2({
+              ...select2Config,
+              dropdownParent: $("#member_info"),
+            })
+            .on("select2:select", function (e) {
+              const person = e.params.data.person;
+              showMemberDetails(person);
+            });
+
+          // Áp dụng cho select box người liên kết
+          $("#linked_to")
+            .select2({
+              ...select2Config,
+              dropdownParent: $(".linked-person"),
+            })
+            .on("select2:select", function (e) {
+              // Xử lý khi chọn người liên kết nếu cần
+              console.log("Đã chọn người liên kết:", e.params.data);
+            });
         }
 
         // 3. Tìm kiếm người gửi (giống Select2)
