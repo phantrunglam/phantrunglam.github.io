@@ -3,28 +3,30 @@
 /* ==================== */
 /* last change: 2025-03-30 */
 @font-face {
-  font-family: "JosefinSans";
-  src: url("../resources/JosefinSans-Light.eot");
-  src: url("../resources/JosefinSans-Light.eot?#iefix")
+  font-family: "BeVietnamPro";
+  src: url("../resources/BeVietnamPro-Light.eot");
+  src: url("../resources/BeVietnamPro-Light.eot?#iefix")
       format("embedded-opentype"),
-    url("../resources/JosefinSans-Light.woff") format("woff"),
-    url("../resources/JosefinSans-Light.ttf") format("truetype"),
-    url("../resources/JosefinSans-Light.svg#JosefinSans-Light") format("svg");
-  font-weight: normal;
+    url("../resources/BeVietnamPro-Light.woff") format("woff"),
+    url("../resources/BeVietnamPro-Light.ttf") format("truetype");
+  font-weight: 300;
   font-style: normal;
 }
 
 @font-face {
-  font-family: "JosefinSans";
-  src: url("../resources/JosefinSans-SemiBold.eot");
-  src: url("../resources/JosefinSans-SemiBold.eot?#iefix")
+  font-family: "BeVietnamPro";
+  src: url("../resources/BeVietnamPro-Bold.eot");
+  src: url("../resources/BeVietnamPro-Bold.eot?#iefix")
       format("embedded-opentype"),
-    url("../resources/JosefinSans-SemiBold.woff") format("woff"),
-    url("../resources/JosefinSans-SemiBold.ttf") format("truetype"),
-    url("../resources/JosefinSans-SemiBold.svg#JosefinSans-SemiBold")
-      format("svg");
-  font-weight: bold;
+    url("../resources/BeVietnamPro-Bold.woff") format("woff"),
+    url("../resources/BeVietnamPro-Bold.ttf") format("truetype");
+  font-weight: 700;
   font-style: normal;
+}
+
+/* Gợi ý dùng font */
+body {
+  font-family: "BeVietnamPro", sans-serif;
 }
 
 /* ==================== */

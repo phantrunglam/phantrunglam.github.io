@@ -2,6 +2,9 @@ logs
 docs
 config
 scripts/auth.js
+bck
+db
+
 
 
 # Local Netlify folder
